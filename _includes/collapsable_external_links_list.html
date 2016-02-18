@@ -1,0 +1,12 @@
+{% if include.links %}
+<div id="{{ include.title | downcase | replace:' ','_' }}">
+  <h4>{{include.title}}</h4>
+  <ul>
+    {% for link in include.links %}
+      <li>
+        <a href="{{ link.url }}">{{ link.text }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

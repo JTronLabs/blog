@@ -9,7 +9,12 @@ layout: default
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    {% include post_resources.html resources=page.resources %}
+    {% include collapsable_external_links_list.html
+      title="Resources and Further Reading"
+      links=page.resources %}
+    {% include collapsable_external_links_list.html
+      title="Materials Used"
+      links=page.materials %}
 
     {{ content }}
   </div>
