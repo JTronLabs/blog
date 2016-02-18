@@ -1,0 +1,9 @@
+{% if include.resources %}
+<ul>
+  {% for resource in include.resources %}
+    <li>
+      <a href="{{ resource.url }}">{{ resource.text }}</a>
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}
