@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
@@ -9,12 +10,25 @@ layout: default
   </header>
 
   <div class="post-content" itemprop="articleBody">
+    {% include blog_text.html
+      content=page.introduction %}
+
+    {% include tutorial_steps_nav_bar.html
+      tutorial_steps=page.tutorial_steps %}
+
     {% include collapsable_external_links_list.html
       title="Resources and Further Reading"
       links=page.resources %}
     {% include collapsable_external_links_list.html
       title="Materials Used"
       links=page.materials %}
+    {% include collapsable_external_links_list.html
+      title="Software Versions"
+      links=page.software_versions %}
+
+    {% include tutorial_steps.html
+      steps=page.tutorial_steps %}
+
 
     {{ content }}
   </div>

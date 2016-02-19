@@ -1,0 +1,31 @@
+.collapsable{
+  border: 2px solid #ccc;
+  padding:5px;
+  margin: 5px;
+  .collapsables_title{
+    h1,h2,h3,h4,h5,h6,img{
+      display: inline-block;
+    }
+  }
+}
+
+#tutorial_nav{
+  ul
+  {
+    list-style-type: none;
+    display: inline-block;
+  }
+  #step-links-list{
+    display: inline-block;
+    width:70%;
+  }
+  #expand-btns{
+    vertical-align: top;
+    text-align:right;
+    display: inline-block;
+    width:20%;
+    button{
+      width:100%;
+    }
+  }
+}

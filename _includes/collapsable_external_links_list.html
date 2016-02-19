@@ -1,12 +1,21 @@
 {% if include.links %}
-<div id="{{ include.title | downcase | replace:' ','_' }}">
-  <h4>{{include.title}}</h4>
-  <ul>
-    {% for link in include.links %}
-      <li>
-        <a href="{{ link.url }}">{{ link.text }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+
+
+<div id="{{ include.title | downcase | replace:' ','_' }}" class="collapsable">
+  <div class="collapsables_title">
+    <img src="" height="21" width="21">
+    <h4>{{include.title}}</h4>
+  </div>
+  <div class="collapsables_content">
+    <ul>
+      {% for link in include.links %}
+        <li>
+          <a href="{{ link.url }}">{{ link.text }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
+
+
 {% endif %}
