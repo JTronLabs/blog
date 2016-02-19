@@ -1,9 +1,0 @@
-<article id="tutorial">
-
-  {% for step in include.steps %}
-    <h2 id="{{ step.title | downcase | replace:' ','_' }}">{{ step.title }}</h2>
-    <div class="summary">{{ step.summary }}</div>
-    <div class="background">{{ step.background }}</div>
-
-  {% endfor %}
-</article>

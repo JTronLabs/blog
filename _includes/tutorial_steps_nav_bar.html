@@ -8,16 +8,16 @@ and moved out to its own box when when the page is wide.
 {% if include.tutorial_steps %}
 
 <nav id="tutorial_nav">
-
+  <h4>Content</h4>
   <div id="step-links-list">
     <ol>
 
       {% for step in include.tutorial_steps %}
         <li>
-          <a href="{{ step.title | downcase | replace:' ','_' | prepend: '#'}}">{{ step.title }}</a>
+          <a href="#step_{{ forloop.index }}">{{ step }}</a>
         </li>
       {% endfor %}
-      
+
     </ol>
   </div>
 

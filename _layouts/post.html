@@ -10,8 +10,7 @@ layout: default
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    {% include blog_text.html
-      content=page.introduction %}
+    <div id="introduction">{{ page.introduction }}</div>
 
     {% include tutorial_steps_nav_bar.html
       tutorial_steps=page.tutorial_steps %}
@@ -25,10 +24,6 @@ layout: default
     {% include collapsable_external_links_list.html
       title="Software Versions"
       links=page.software_versions %}
-
-    {% include tutorial_steps.html
-      steps=page.tutorial_steps %}
-
 
     {{ content }}
   </div>
