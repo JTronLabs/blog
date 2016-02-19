@@ -14,10 +14,12 @@ and moved out to its own box when when the page is wide.
 
       {% for step in include.tutorial_steps %}
         <li>
-          <a href="#step_{{ forloop.index }}">{{ step }}</a>
+          <a href="{{ step | downcase | replace:' ','-' | prepend: '#'}}">{{ step }}</a>
         </li>
       {% endfor %}
-
+      <li>
+        <a href="#extensions">Extensions and Next Steps</a>
+      </li>
     </ol>
   </div>
 
