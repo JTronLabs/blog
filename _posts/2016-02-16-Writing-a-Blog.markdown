@@ -7,9 +7,11 @@ introduction: "Welcome to my blog!"
 resources: [
               {text: "Jekyll", url: "http://jekyllrb.com/"},
               {text: "Jekyll Variables", url: "http://jekyllrb.com/docs/variables/"},
-              {text: "Jekyll's Liquid Templates", url: "http://jekyllrb.com/docs/templates/"},  
+              {text: "Jekyll's Liquid Templates", url: "http://jekyllrb.com/docs/templates/"},
               {text: "Jekyll Variables", url: "http://jekyllrb.com/docs/variables/"},
               {text: "GitHub Flavored Markdown", url: "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"},
+              {text: "Kramdown Quick Reference", url: "http://kramdown.gettalong.org/quickref.html"},
+              {text: "Kramdown Options", url: "http://kramdown.gettalong.org/options.html"},
               {text: "The YAML Format", url: "http://symfony.com/doc/current/components/yaml/yaml_format.html"},         
               {text: "Liquid for Programmers", url: "https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers"},
               {text: "Liquid for Designers", url: "https://github.com/Shopify/liquid/wiki/Liquid-for-Designers"}
