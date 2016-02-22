@@ -10,25 +10,23 @@ layout: default
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <div id="introduction">{{ page.introduction }}</div>
+    <div id="introduction">
 
-    {% include tutorial_steps_nav_bar.html
-      tutorial_steps=page.tutorial_steps %}
+{% markdown %}
+{{ page.introduction }}
+{% endmarkdown %}
 
-    {% include collapsable_external_links_list.html
-      title="Resources and Further Reading"
-      links=page.resources %}
-    {% include collapsable_external_links_list.html
-      title="Materials Used"
-      links=page.materials %}
-    {% include collapsable_external_links_list.html
-      title="Software Versions"
-      links=page.software_versions %}
+    </div>
+
+    {% include tutorial_steps_nav_bar.html tutorial_steps=page.tutorial_steps %}
+
+    {% include collapsable_external_links_list.html title="Resources and Further Reading" links=page.resources %}
+    {% include collapsable_external_links_list.html title="Materials Used" links=page.materials %}
+    {% include collapsable_external_links_list.html title="Software Versions" links=page.software_versions %}
 
     {{ content }}
 
-    {% include extensions.html
-      content=page.extensions %}
+    {% include extensions.html content=page.extensions %}
   </div>
 
 </article>

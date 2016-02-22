@@ -6,17 +6,12 @@
   <h4>{{include.title}}</h4>
 
   <div class="collapsables_content">
-    <ul>
-      {% for link in include.links %}
-        <li>
-          {% if link.url != "" %}
-            <a href="{{ link.url }}">{{ link.text }}</a>
-          {% else %}
-            <p>{{ link.text }}</p>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
+
+{% markdown %}
+{{ include.links }}
+{% endmarkdown %}
+
+
   </div>
 </div>
 

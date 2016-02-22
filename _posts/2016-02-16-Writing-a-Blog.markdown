@@ -4,21 +4,36 @@ title:  "Creating a free blog with Jekyll"
 date:   2016-02-16 18:58:16 -0500
 categories: jekyll update
 introduction: "Welcome to my blog!"
-resources: [
-              {text: "Jekyll", url: "http://jekyllrb.com/"},
-              {text: "Jekyll Variables", url: "http://jekyllrb.com/docs/variables/"},
-              {text: "Jekyll's Liquid Templates", url: "http://jekyllrb.com/docs/templates/"},
-              {text: "Jekyll Variables", url: "http://jekyllrb.com/docs/variables/"},
-              {text: "GitHub Flavored Markdown", url: "https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"},
-              {text: "Kramdown Quick Reference", url: "http://kramdown.gettalong.org/quickref.html"},
-              {text: "Kramdown Options", url: "http://kramdown.gettalong.org/options.html"},
-              {text: "The YAML Format", url: "http://symfony.com/doc/current/components/yaml/yaml_format.html"},         
-              {text: "Liquid for Programmers", url: "https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers"},
-              {text: "Liquid for Designers", url: "https://github.com/Shopify/liquid/wiki/Liquid-for-Designers"}
-            ]
-software_versions: [
-              {text: "Ubuntu 14.04.4 LTS", url: "http://www.ubuntu.com/download"},
-              {text: "Ruby: 2.2.1p85", url: "https://www.ruby-lang.org/en/downloads/"},
-              {text: "Jekyll 3.1.1", url: "http://jekyllrb.com/docs/installation/"}
-            ]
+resources: >
+              - [Jekyll](http://jekyllrb.com/)
+
+              - [Jekyll Variables](http://jekyllrb.com/docs/variables/)
+
+              - [Jekyll's Liquid Templates](http://jekyllrb.com/docs/templates/)
+
+              - [Jekyll Variables](http://jekyllrb.com/docs/variables/)
+
+              - [GitHub Flavored Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+
+              - [Kramdown Quick Reference](http://kramdown.gettalong.org/quickref.html)
+
+              - [Kramdown Options](http://kramdown.gettalong.org/options.html)
+
+              - [The YAML Format](http://symfony.com/doc/current/components/yaml/yaml_format.html)  
+
+              - [Liquid for Programmers](https://github.com/Shopify/liquid/wiki/Liquid-for-Programmers)
+
+              - [Liquid for Designers](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
+
+              - [Using Jekyll Plug-ins](http://jekyllrb.com/docs/plugins/)
+
+              - [Letting Markdown work in any File](https://github.com/imathis/jekyll-markdown-block)
+
+
+software_versions: >
+              - [Ubuntu 14.04.4 LTS](http://www.ubuntu.com/download)
+              
+              - [Ruby: 2.2.1p85](https://www.ruby-lang.org/en/downloads/)
+
+              - [Jekyll 3.1.1](http://jekyllrb.com/docs/installation/)
 ---
