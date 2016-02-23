@@ -13,7 +13,16 @@ dl, dd, ol, ul, figure {
 /**
  * Basic styling
  */
+html {
+     position: relative;
+     min-height: 100%;
+}
+
+
+
 body {
+    margin: 0 0 $footer-height+$spacing-unit; /* bottom = footer height */
+
     font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
     color: $text-color;
     background-color: $background-color;
@@ -24,8 +33,6 @@ body {
     font-feature-settings: "kern" 1;
     font-kerning: normal;
 }
-
-
 
 /**
  * Set `margin-bottom` to maintain vertical rhythm
@@ -39,12 +46,15 @@ ul, ol, dl, figure,
 
 
 
+
 /**
  * Images
  */
 img {
     max-width: 100%;
     vertical-align: middle;
+    display: block;
+    margin: 0 auto;
 }
 
 

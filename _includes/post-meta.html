@@ -1,0 +1,9 @@
+<div class="post-meta">
+  <!--
+  {% if page.author %}
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
+  | {% endif %}
+  -->
+  By <a href="/about" class="text_like_link">James Lowrey</a> |
+  <time datetime="{{ include.date | date_to_xmlschema }}" itemprop="datePublished">{{ include.date | date: "%b %-d, %Y" }}</time>
+</div>

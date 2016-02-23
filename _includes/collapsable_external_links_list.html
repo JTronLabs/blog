@@ -1,7 +1,7 @@
 {% if include.links %}
 
 
-<div id="{{ include.title | downcase | replace:' ','_' }}" class="collapsable">
+<nav id="{{ include.title | downcase | replace:' ','_' }}" class="collapsable">
 
   <h4>{{include.title}}</h4>
 
@@ -13,7 +13,7 @@
 
 
   </div>
-</div>
+</nav>
 
 
 {% endif %}

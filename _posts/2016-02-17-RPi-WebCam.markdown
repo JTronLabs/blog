@@ -1,8 +1,12 @@
 ---
 layout: post
 title:  "Setting up USB WebCam with Raspberry Pi and Motion"
+title-subtext: "Bringing the power of the NSA to your home"
+blurb: "Learn how to set up 24/7 video monitoring with a Raspberry Pi. Setup and stream the video to a password locked, home web server. Monitor your pets, possessions, or neighborhood while you're away!"
+keywords: "raspberry,pi"
 date:   2016-02-17 18:58:16 -0500
-categories: jekyll update
+author: James Lowrey
+categories: raspberry-pi apache hardware
 introduction: |
   Problem: SO misses her dog when she's away from the house. I need a Valentine's day present.             
 
@@ -24,6 +28,10 @@ resources: >
               - [Motion Config files](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigFileOptions)
 
               - [Static IP Address](http://www.modmypi.com/blog/tutorial-how-to-give-your-raspberry-pi-a-static-ip-address)
+
+              -[Password Protect Web Serve](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04)
+
+              -[Connect IP to Domain Name](https://www.namecheap.com/support/knowledgebase/article.aspx/1162/46/how-can-i-point-my-domain-name-to-my-home-servers-ip)
 
 materials: >
               - [Raspberry Pi Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
@@ -48,15 +56,7 @@ tutorial_steps: ["Setup your Raspberry Pi",
               "Enable Password Protection",
               "Turn Camera On/Off Automatically"
             ]
-quick_tips: [
-  "Use the 'top' command to monitor Pi's CPU and RAM usage levels. Fiddle with resolution and frame-rate of Motion's video stream if it is too high",
-  ""
-  ]
-extensions: >
-  asdad
 ---
-
-## {{page.tutorial_steps[0]}}
 
 {::options parse_block_html="true" /}
 <div class="collapsable">
@@ -223,7 +223,7 @@ sudo nano /usr/local/etc/motion.conf #options
 sudo motion #run the motion program! If this doesn't work, try 'sudo /usr/local/bin/motion' (where Motion's executable should be located)
 {% endhighlight %}
 
-Motion is now up and running! Ensure that it is working by entering <Pi-IP-ADDR>:8081 (assuming you did not change Motion's port in motion.conf) into your computer's browser (within your home's LAN). If your USB camera is plugged in then a video will be displayed, otherwise a gray rectangle will appear.
+Motion is now up and running! Ensure that it is working by entering {Pi-IP-ADDR}:8081 (assuming you did not change Motion's port in motion.conf) into your computer's browser (within your home's LAN). If your USB camera is plugged in then a video will be displayed, otherwise a gray rectangle will appear.
 
 </div>
 
@@ -233,7 +233,7 @@ Motion is now up and running! Ensure that it is working by entering <Pi-IP-ADDR>
 
 ### Setting up Static IP Address
 
-As I was figuring out this Motion stuff, I encountered a strange problem: randomly SSH stopped working. I ensured that the Pi and my computer were still connected to the internet but then was kind of stuck (since I hadn't learned about restarting SSH servers yet). I went to my Pi and double checked the IP, and to my surprise found that it had changed! I tried to connect to the new IP and it still failed. I logged into my router (we will cover this more later), saw all the IPs in the local network, and tried to SSH into them all. Eventually I restarted the SSH server on the Pi, used the IP address the Pi gave me through 'ip addr', and it worked.
+As I was figuring out this Motion stuff, I encountered a strange problem: randomly SSH stopped working. I checked that the Pi and my computer were connected to the internet and then checked the Pi's IP address. To my surprise found that it had changed! I tried to connect to the new IP and it still failed. Eventually I restarted the SSH server on the Pi, used the IP address the Pi gave me and it worked.
 
 That extremely interesting story is given just to demonstrate that IPs are not static by default inside a LAN. Routers use something called [Dynamic Host Configuration Protocol (DHCP)](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) that automatically assigns IP addresses as devices enter and leave the LAN. If the addresses were all static, there would be a limited number of devices that could ever enter the LAN. There are [trade-offs](https://www.iplocation.net/static-vs-dynamic-ip-address) to having a static vs dynamic IP address, but in this application I believe a static one is better. Having the Pi maintain a static IP allows for easy & consistent SSH and web connections. Sticking with the default dynamic IP address will make your pi a bit more difficult for a home invader in your LAN to SSH into, but it will require the use of a [Dynamic Domain Name System (DDNS) service](https://en.wikipedia.org/wiki/Dynamic_DNS). When you enter a website name into the browser, [DNS name servers](https://en.wikipedia.org/wiki/Domain_Name_System) around the globe map the [URL](https://en.wikipedia.org/wiki/Uniform_Resource_Locator) text to the IP of the server you are attempting to connect to. With a dynamic IP you will need to pay for a service like [NoIP](http://www.noip.com/), [DynDNS](http://dyn.com/dns/) or [ComEXE (Chinese)](http://translate.google.com/translate?hl=en&sl=auto&tl=en&u=http%3A%2F%2Fwww.comexe.cn%2F). I have heard of a free solution called [DuckDNS](www.duckdns.org), but I have not tested it. Regardless, all these solutions increase complexity with a negligible security trade-off.
 
@@ -265,15 +265,28 @@ ifconfig #or 'ip addr'
 {::options parse_block_html="true" /}
 <div class="collapsable">
 
-### Setting up Apache2 Web Server
+### Setting up Apache Web Server
 
-[Apache](https://en.wikipedia.org/wiki/Apache_HTTP_Server) is the world's most used web server software. It is one of the easiest to get a small site running and has a ton of documentation available. Apache, and all other HTTP web servers, run by default on port 80. Before, when we saw Motion's output by enterin <Pi-IP>:8081 in the browser, we were accessing that port in our Pi. So for web servers, http://<IP> and http://<IP>:80 will give the same result.
+[Apache](https://en.wikipedia.org/wiki/Apache_HTTP_Server) is the world's most used web server software. It is one of the easiest to get a small site running and has a ton of documentation available. Apache, and all other HTTP web servers, run by default on port 80. Before, when we saw Motion's output by entering <Pi-IP>:8081 in the browser, we were accessing that port in our Pi. So for web servers, http://{IP} and http://{IP}:80 will give the same result.
 
 {% highlight bash %}
 sudo apt-get install apache2 #install the web site software
 {% endhighlight %}
 
-That's it! If put <Pi-IP> in URL bar in the browser, a default apache welcome screen will appear. This page will be located in /var/www/html/index.html (or maybe /var/www/index.html). Edit the index.html page to change the landing page of your site. Add more HTML pages to expand your site. To embed the video in the site, use an iframe in your index.html page. An iframe is just a window into another page, in this case Motion's video streaming (which is available in your LAN on a different port).
+That's it! If put {Pi-IP} in URL bar in the browser, a default apache welcome screen will appear. This page will be located in /var/www/html/index.html (or maybe /var/www/index.html). Edit the index.html page to change the landing page of your site. Add more HTML pages to expand your site.
+
+It is recommended that you do not use port 80 for your home server. Some ISPs will automatically block this port and prevent forwarding, it also makes you home server more likely to be hacked. To use a different port, you need to edit your Apache configuration.
+
+{% highlight bash %}
+#edit port for accessing Apache web server
+sudo nano /etc/apache2/ports.conf
+  #change the 'Listen 80' line to another port, 8079 for example
+  Listen 8079
+{% endhighlight %}
+
+Now to access your web page, enter {IP}:{New_Port_Number} into the browser.
+
+To embed the video in the site, use an iframe in your index.html page. An iframe is just a window into another page, in this case Motion's video streaming (which is available in your LAN on a different port).
 
 {% highlight bash %}
 #Edit website landing page
@@ -285,35 +298,105 @@ sudo nano /var/www/index.html
 <iframe src="http://<PI-IP>:8081" height="750" width="1300"></iframe>
 {% endhighlight %}
 
+If you go to your Pi's IP in your computer's browser you'll see your video! If you enabled stream_authentication in motion.conf earlier, then it will require a password to view. If you would also like to password protect your web server then you will need to setup htaccess with Apache server. Digital Ocean has a great guide on how to do this [here](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04).
+
+
+{% highlight bash %}
+# Password protect web server
+sudo apt-get install apache2-utils
+sudo htpasswd -c /etc/apache2/.htpasswd new_user #create a user, it will prompt for a password. For all subsequent users, remove the -c flag from this command
+cd /etc/apache2/sites-enabled
+#if using ssl, modify default-ssl file. If using HTTP, modify 000-default
+#look for the '<Directory /var/www/> ........ </Directory>' text
+# inside of this 'Directory' tag, ensure that these two lines exist: "AllowOverride All" and "Require all granted"
+sudo nano /var/www/.htaccess #create .htaccess for managing the password protected connection
+	#copy this text into the new .htaccess file
+	AuthType Basic
+	AuthName "Restricted Content"
+	AuthUserFile /etc/apache2/.htpasswd
+	Require valid-user
+service apache2 restart #restart the server
+{% endhighlight %}
+
+Now your web server and your Motion server will be password protected! You can use different passwords and usernames for each if you wish.
+
 </div>
 
 {::options parse_block_html="true" /}
 <div class="collapsable">
 
-### Expose Video to Web
+### Make it Viewable on the Web
 
-So far, everything we've done has only been viewable in the local network. But what if you want to see your cameras from outside the house?
+So far, everything we've done has only been viewable in the local network. But what if you want to see your cameras from outside the house? Now that we have the stream and the site password protected, we can expose the site to the web. Don't tell many people about the site though! The more that people connect to your Pi (even without logging in) the more load it will have to process, and the more data you will use from your ISP.
 
-Port forwarding
+First step is to set up [port forwarding](https://en.wikipedia.org/wiki/Port_forwarding). Since your whole home has only 1 public IP address, you need to configure your router to take requests and route them to the correct device's IP and port. You can find your IP in a variety of ways, the easiest is to simple click [here (Google it!)](https://www.google.com/search?client=ubuntu&channel=fs&q=what+is+my+ip&ie=utf-8&oe=utf-8). Port forwarding will take incoming requests to your public IP, and route them to the correct local IP and port number. To do so you must log into your router.
 
-TLD + A records
+Routers made by different companies will have different log-in steps. Typically though, you will enter your router's IP address (192.168.0.1 by default) into the browser and log-in with the default credentials visible on the bottom of the router. Usually the username and password are both 'admin', or maybe the username is 'admin' with no password.
 
-MJProxy
+![Router Log-in](/img/router_log_in.png)
 
+Once logged in, navigate to the 'Forwarding' or 'Port-Forwarding' section. Here we will setup some records that will translate requests at a specific port on your public IP to be routed to a local IP. Remember, by default HTTP requests are at port 80, and HTTPS requests are at 443. If using a custom port then a colon and number (:XXXX) must be appended to the end of the url. Here is a screenshot of my setup, and some useful info from TPLink's router as well. My Motion server is available on port 8081, and my web server is on port 8079 (as discussed in the Apache section).
+
+![Port Forwarding](/img/port_forwarding.png)
+
+With that, your site and video stream are active! You can put your public IP and port number into any browser and view the output.
+
+Typing in an IP address every time you want to view your site will get a bit tedious, it's best to connect it to a [Domain Name](https://en.wikipedia.org/wiki/Domain_name). Instead of an IP, we  will be able to type words into the browser's URL to reach our site. To do this, you will need a yearly subscription from [a domain name registrar](https://en.wikipedia.org/wiki/Domain_name_registrar) (don't worry, it's very cheap). I highly, highly recommend [Namecheap](https://www.namecheap.com/). I've registered a few domains with them and their customer service has been extremely helpful when I've had issues. They also have some of the lowest prices, a beautifully designed website, and support a [free and open](https://blog.namecheap.com/we-say-no-to-sopa/) web (which [GoDaddy](http://www.bbc.com/news/technology-16320149) does not without pressure). So first step is to go to namecheap and register a domain.
+
+![Namecheap](/img/namecheap.png)
+
+Once you have a shiny new domain you can follow [Namecheap's tutorial](https://www.namecheap.com/support/knowledgebase/article.aspx/1162/46/how-can-i-point-my-domain-name-to-my-home-servers-ip) or follow along here with me. Go to your domain list and click on your new domain. From there, go to the advanced DNS section and click on 'Add a new record'. We will be adding an 'A' record (Address Record). Input your public IP into the 'Value' field, and an '@' into the host field. Wait a few minutes and your domain name will be live!
+
+At this point, I would also recommend adding a URL redirect record. Since port 80 is default and we are not using it, we would like to be auto redirected to the correct port. The Masked/Unmasked option is what displays in the browser's URL. For more info on DNS record types, click [here](https://www.namecheap.com/support/knowledgebase/article.aspx/579).
+
+![A Record](/img/a_record.png)
+
+Don't forget to save them by clicking the 'Checkmark' icon.
 
 </div>
-## {{page.tutorial_steps[1]}}
 
-## {{page.tutorial_steps[2]}}
+{::options parse_block_html="true" /}
+<div class="collapsable">
 
-## {{page.tutorial_steps[3]}}
+### Next Steps
 
-## {{page.tutorial_steps[4]}}
+If you only want the video stream to be on at certain times, you can use a built-in Linux program called [Cron](https://en.wikipedia.org/wiki/Cron) to auto turn it on and off. The notation can be a bit tricky, but it's pretty easy to set up. Simply edit the crontab file and add entries for each on/off item. You can follow the instructions in the [Ubuntu community](https://help.ubuntu.com/community/CronHowto).
 
-## {{page.tutorial_steps[5]}}
+{% highlight bash %}
+#setup Cron to automatically turn camera on and off
+sudo crontab -e #use sudo if your commands require root access, other sudo is not needed here
+  #add lines like this to the end of the crontab file.
+  #These turn on Motion at 9am, and turns it off at 9pm everyday
+  0 9 * * * sudo motion
+  0 21 * * * sudo service motion stop
+{% endhighlight %}
 
-## {{page.tutorial_steps[6]}}
+I noticed that the Pi also has issues with Wi-Fi randomly dropping out. To fix this, I tried setting 'wireless power off' in /etc/network/interfaces (as Google would suggest), but it didn't solve the problem. Instead I [found a script](https://www.raspberrypi.org/forums/viewtopic.php?t=16054), modified it a bit, and set it up to run every minute with Cron. So the Pi will reconnect within a minute if it cuts out, and the script is not resource intensive at all.
 
-## {{page.tutorial_steps[7]}}
+{% highlight bash %}
+#auto reconnect to wifi if a drop is detected
+sudo nano /home/reconnect_to_network.sh
 
-## {{page.tutorial_steps[8]}}
+########################################
+#!/bin/bash
+
+if ifconfig wlan0 | grep -q "inet addr:" ; then #check ifconfig output for 'inet addr' -> internet is connected
+        echo "Network connection up!"
+else #internet is down, tell Wi-Fi interface to go back up
+        echo "Network connection down! Attempting reconnection."
+        ifup --force wlan0
+fi
+########################################
+{% endhighlight %}
+
+{% highlight bash %}
+#and my additional crontab entry. It runs every minute of every day
+sudo crontab -e
+* * * * * sudo /home/reconnect_to_network.sh #add this line to end of cron file
+{% endhighlight %}
+
+Beyond that there are a couple directions you can go. You can configure motion for [multiple USB Cameras](http://ubuntuforums.org/showthread.php?t=1897786), [save files](http://www.lavrsen.dk/foswiki/bin/view/Motion/FrequentlyAskedQuestions#How_do_I_disable_or_enable_saving_jpeg_files_when_motion_is_detected_63) when motion is detected, or  try out different video capturing software (like [ZoneMinder](https://zoneminder.com/)). Instead of having 2 password protected pages, you can embed the Motion stream on your web server without making it publicly available by itself. Then the only access to it would be through your web site. To do this you will need to proxy the stream to your web page with [MJPEG Proxy Grab](http://www.lavrsen.dk/foswiki/bin/view/Motion/MjpegProxyGrab).
+
+That's it! Thanks for checking out the post today, best of luck!
+
+</div>

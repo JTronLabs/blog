@@ -1,6 +1,8 @@
 ---
 layout: post
 title:  "Creating a free blog with Jekyll"
+title-subtext: "For spouting political opinions!"
+blurb: "Utilize Jekyll, Liquid, YAML, SCSS, CSS, JS, HTML, Ruby, Kramdown, Markdown, Github-Pages, and many more buzzwords to create a static website. "
 date:   2016-02-16 18:58:16 -0500
 categories: jekyll update
 introduction: "Welcome to my blog!"
@@ -32,7 +34,7 @@ resources: >
 
 software_versions: >
               - [Ubuntu 14.04.4 LTS](http://www.ubuntu.com/download)
-              
+
               - [Ruby: 2.2.1p85](https://www.ruby-lang.org/en/downloads/)
 
               - [Jekyll 3.1.1](http://jekyllrb.com/docs/installation/)
