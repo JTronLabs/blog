@@ -169,7 +169,17 @@
     }
 }
 
+//About page
+#contact-links{
+  text-align: center;
+  #contact-link-images{
+    display: block;
+    margin: 0 auto;
 
+    a{ display: inline-block; }
+  }
+  font-size:10px;
+}
 
 /**
  * Page content
