@@ -4,7 +4,7 @@ title:  "Setting up USB WebCam with Raspberry Pi and Motion"
 date:   2016-02-17 18:58:16 -0500
 categories: jekyll update
 introduction: |
-  Problem: SO misses her dog when she's away from the house               
+  Problem: SO misses her dog when she's away from the house. I need a Valentine's day present.             
 
   Solution: Over engineering!                                             
 
@@ -20,6 +20,10 @@ resources: >
               - [Motion GitHub Repo](https://github.com/sackmotion/motion)
 
               - [Default motion.conf](https://github.com/sackmotion/motion/blob/master/motion-dist.conf.in)
+
+              - [Motion Config files](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigFileOptions)
+
+              - [Static IP Address](http://www.modmypi.com/blog/tutorial-how-to-give-your-raspberry-pi-a-static-ip-address)
 
 materials: >
               - [Raspberry Pi Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
@@ -123,15 +127,16 @@ This will print out a bunch of info about your networking interfaces. The 'lo' i
        valid_lft forever preferred_lft forever
  2: eth0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast state DOWN mode DEFAULT qlen 1000#This is the ethernet interface, write down the inet value (which does not appear here but would if ethernet were connected)
     link/ether b8:27:eb:61:48:be brd ff:ff:ff:ff:ff:ff
-3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP qlen 1000 #this is the Wi-Fi interface. inet/LAN IP value is 192.168.0.226, you can ignore the /24
+3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP qlen 1000 #this is the Wi-Fi interface. inet/LAN IP value is 192.168.0.100, you can ignore the /24
     link/ether 00:0f:55:a8:fc:62 brd ff:ff:ff:ff:ff:ff
-    inet 192.168.0.226/24 brd 192.168.0.255 scope global wlan0
+    inet 192.168.0.100/24 brd 192.168.0.99 scope global wlan0
        valid_lft forever preferred_lft forever
 {% endhighlight %}
 
 If you're connecting from a Linux or Mac computer, ssh is as easy as opening a terminal and typing
 
 {% highlight bash %}
+#connecting with ssh. Windows users need PuTTy
 ssh pi@The_IP_from_earlier
 {% endhighlight %}
 
@@ -142,7 +147,8 @@ That's it! You should be connected now!
 If SSH is not working, plug your Pi back into the monitor and check that SSH is enabled by entering the command
 
 {% highlight bash %}
-sudo raspi-config #ensure SSH is enabled under 'Advanced' settings
+#from your pi, ensure SSH is enabled under 'Advanced' settings
+sudo raspi-config
 {% endhighlight %}
 
 Navigate to the 'Advanced' settings, and then 'SSH'. Ensure it is enabled.
@@ -150,6 +156,7 @@ Navigate to the 'Advanced' settings, and then 'SSH'. Ensure it is enabled.
 If it's still not working, double check that your Pi has internet access. If you could not see the 'inet' value from before, your Pi is not connected. You can also try [pinging](https://en.wikipedia.org/wiki/Ping_%28networking_utility%29) a few popular websites to look for a response.
 
 {% highlight bash %}
+#check internet connection
 ping www.google.com #A good response (no dropped packets) indicates you are connected to the internet
 ping www.facebook.com
 ping www.stackoverflow.com
@@ -159,6 +166,7 @@ ping www.stackoverflow.com
 Lastly, you can try restarting the SSH server. Like a web-server, an SSH server can occasionally become messed up and need a restart. It's happened to me before with dynamic IPs. Do so with
 
 {% highlight bash %}
+#last-ditch effort: restart ssh server to get it working
 sudo service ssh restart #double check that SSH server is good to go
 {% endhighlight %}
 
@@ -172,6 +180,7 @@ sudo service ssh restart #double check that SSH server is good to go
 This part is easy. Ensure that your firmware and software are up-to-date by running these commands in the Pi's terminal. It will likely take the Pi awhile run.
 
 {% highlight bash %}
+#updating pi
 sudo apt-get install rpi-update #rpi-update is a package that manages Pi's firmware updates
 sudo rpi-update #run the package for the updates
 sudo apt-get update #fetch new versions of Linux software
@@ -180,6 +189,119 @@ sudo apt-get upgrade #apply the fetched updates
 
 </div>
 
+{::options parse_block_html="true" /}
+<div class="collapsable">
+
+### Setup Motion
+
+[Motion](https://en.wikipedia.org/wiki/Motion_%28surveillance_software%29) is surveillance software written for Linux in [C](https://en.wikipedia.org/wiki/C_%28programming_language%29). It is strictly a [command-line](https://en.wikipedia.org/wiki/Command-line_interface) tool that can also be run as a  [daemon](https://en.wikipedia.org/wiki/Daemon_%28computing%29), making it perfect for a hands-off, embedded system. FYI, there are alternatives available that can do the same job ([ZoneMinder](https://zoneminder.com/) if you later wish to try different options.
+
+Perhaps the most important info in this tutorial is how to install Motion. Typically, linux software is installed using 'sudo apt-get X', but doing so with Motion will give you outdated software. Stream-[authentication](https://en.wikipedia.org/wiki/Authentication) and other features will be disabled if you go this route. Instead, we will download the source from GitHub, compile it, and manually add it to the Linux registers. Don't worry though, it's very easy to accomplish:
+
+{% highlight bash %}
+#installing motion
+git clone http://github.com/sackmotion/motion #most up-to-date version with authentication patch! Do not use 'apt-get install motion'!!!
+cd motion #move into new motion directory
+./configure #gets the software ready to build on your specific system. I needed to install a dependency (libjpeg-dev) by entering 'sudo apt-get install libjpeg-dev'
+make #builds/compiles the source code into a machine readable program with help from a Makefile
+sudo make install #copies the built files to final destination
+sudo mv /usr/local/etc/motion-dist.conf /usr/local/etc/motion.conf #must rename the distribution (default) file to let Motion know it is now user-configured.
+{% endhighlight %}
+
+If you want more info about this process, [here](https://robots.thoughtbot.com/the-magic-behind-configure-make-make-install) is a good blog I found detailing the commands a bit more.
+
+Next up is editing Motion's configuration file. Here is where we can change the quality of the camera, enable web streaming, enable web authentication, etc. For all the configuration options, check [here](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigFileOptions). When you  edit the config file, there should be a lot of options and comments explaining them already there. If not, you can copy+paste the [default config file](https://github.com/sackmotion/motion/blob/master/motion-dist.conf.in) from Motion's GitHub Repo. You can check my motion.conf file on GitHub [here](). Check out the default file, my file, and fiddle with options to see what you like.
+
+Here are some of the useful options and what they do: daemon on (background mode), height or width (resolution), webcam_quality (jpeg compression) stream_maxrate and framerate (sets framerate), stream_authentication and stream_auth_method (enable authentication), webcam_localhost and control_localhost (turn off to allow motion to stream to non-localhost).
+
+{% highlight bash %}
+#editing motion.conf
+sudo nano /usr/local/etc/motion.conf #options
+{% endhighlight %}
+
+{% highlight bash %}
+sudo motion #run the motion program! If this doesn't work, try 'sudo /usr/local/bin/motion' (where Motion's executable should be located)
+{% endhighlight %}
+
+Motion is now up and running! Ensure that it is working by entering <Pi-IP-ADDR>:8081 (assuming you did not change Motion's port in motion.conf) into your computer's browser (within your home's LAN). If your USB camera is plugged in then a video will be displayed, otherwise a gray rectangle will appear.
+
+</div>
+
+
+{::options parse_block_html="true" /}
+<div class="collapsable">
+
+### Setting up Static IP Address
+
+As I was figuring out this Motion stuff, I encountered a strange problem: randomly SSH stopped working. I ensured that the Pi and my computer were still connected to the internet but then was kind of stuck (since I hadn't learned about restarting SSH servers yet). I went to my Pi and double checked the IP, and to my surprise found that it had changed! I tried to connect to the new IP and it still failed. I logged into my router (we will cover this more later), saw all the IPs in the local network, and tried to SSH into them all. Eventually I restarted the SSH server on the Pi, used the IP address the Pi gave me through 'ip addr', and it worked.
+
+That extremely interesting story is given just to demonstrate that IPs are not static by default inside a LAN. Routers use something called [Dynamic Host Configuration Protocol (DHCP)](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) that automatically assigns IP addresses as devices enter and leave the LAN. If the addresses were all static, there would be a limited number of devices that could ever enter the LAN. There are [trade-offs](https://www.iplocation.net/static-vs-dynamic-ip-address) to having a static vs dynamic IP address, but in this application I believe a static one is better. Having the Pi maintain a static IP allows for easy & consistent SSH and web connections. Sticking with the default dynamic IP address will make your pi a bit more difficult for a home invader in your LAN to SSH into, but it will require the use of a [Dynamic Domain Name System (DDNS) service](https://en.wikipedia.org/wiki/Dynamic_DNS). When you enter a website name into the browser, [DNS name servers](https://en.wikipedia.org/wiki/Domain_Name_System) around the globe map the [URL](https://en.wikipedia.org/wiki/Uniform_Resource_Locator) text to the IP of the server you are attempting to connect to. With a dynamic IP you will need to pay for a service like [NoIP](http://www.noip.com/), [DynDNS](http://dyn.com/dns/) or [ComEXE (Chinese)](http://translate.google.com/translate?hl=en&sl=auto&tl=en&u=http%3A%2F%2Fwww.comexe.cn%2F). I have heard of a free solution called [DuckDNS](www.duckdns.org), but I have not tested it. Regardless, all these solutions increase complexity with a negligible security trade-off.
+
+I followed the instructions from [ModMyPi](http://www.modmypi.com/blog/tutorial-how-to-give-your-raspberry-pi-a-static-ip-address) to setup a static IP.
+
+{% highlight bash %}
+#setup static IP address on your Pi
+ifconfig #prints out info about your networking interfaces
+#write down inet addr (Pi's Current IP Address), Bcast (The Broadcast IP Range), Mask (Subnet Mask Address)
+netstat -nr #displays IP routing table
+#write down Gateway and destination addresses
+sudo nano /etc/network/interfaces #edit Pi's network interfaces. wlan0 if using Wi-Fi, eth0 if using ethernet
+#change 'iface eth0 inet dhcp' to 'iface eth0 inet static' or for wlan0, change 'iface default inet dhcp' to 'iface default inet static'
+#directly below that line, enter the following lines with the info gathered previously
+address 192.168.0.100 #address you wish to assign to Pi. Must be in network range, and is best to give the last number a high value to avoid taking another device's IP
+netmask 255.255.255.0 #Mask value from earlier
+network 192.168.0.0 #Destination address from earlier
+broadcast 192.168.0.255 #Bcast address from earlier
+gateway 192.168.0.1 #Gateway address from earlier
+#control-X, Y, Enter to exit and save the file in nano
+sudo rm /var/lib/dhcp/* #Remove any existing leases
+sudo reboot
+#log-in and check new inet address using
+ifconfig #or 'ip addr'
+{% endhighlight %}
+
+</div>
+
+{::options parse_block_html="true" /}
+<div class="collapsable">
+
+### Setting up Apache2 Web Server
+
+[Apache](https://en.wikipedia.org/wiki/Apache_HTTP_Server) is the world's most used web server software. It is one of the easiest to get a small site running and has a ton of documentation available. Apache, and all other HTTP web servers, run by default on port 80. Before, when we saw Motion's output by enterin <Pi-IP>:8081 in the browser, we were accessing that port in our Pi. So for web servers, http://<IP> and http://<IP>:80 will give the same result.
+
+{% highlight bash %}
+sudo apt-get install apache2 #install the web site software
+{% endhighlight %}
+
+That's it! If put <Pi-IP> in URL bar in the browser, a default apache welcome screen will appear. This page will be located in /var/www/html/index.html (or maybe /var/www/index.html). Edit the index.html page to change the landing page of your site. Add more HTML pages to expand your site. To embed the video in the site, use an iframe in your index.html page. An iframe is just a window into another page, in this case Motion's video streaming (which is available in your LAN on a different port).
+
+{% highlight bash %}
+#Edit website landing page
+#I suggest developing on a computer other than the Pi, and using Git to transfer the files in between them
+sudo nano /var/www/index.html
+{% endhighlight %}
+{% highlight html %}
+<!-- Add this line to your website's landing page to include video-->
+<iframe src="http://<PI-IP>:8081" height="750" width="1300"></iframe>
+{% endhighlight %}
+
+</div>
+
+{::options parse_block_html="true" /}
+<div class="collapsable">
+
+### Expose Video to Web
+
+So far, everything we've done has only been viewable in the local network. But what if you want to see your cameras from outside the house?
+
+Port forwarding
+
+TLD + A records
+
+MJProxy
+
+
+</div>
 ## {{page.tutorial_steps[1]}}
 
 ## {{page.tutorial_steps[2]}}
