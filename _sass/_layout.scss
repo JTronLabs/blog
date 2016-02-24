@@ -96,17 +96,21 @@
 /**
  * Site footer
  */
- footer {
-     position: absolute;
-     left: 0;
-     bottom: 0;
-     height: $footer-height;
-     width: 100%;
- }
 
 .site-footer {
+    position: absolute; //Position on bottom of ever page
+    left: 0;
+    bottom: 0;
+    height: $footer-height;
+    width: 100%;
+
     border-top: 1px solid $grey-color-light;
     padding: $spacing-unit 0;
+
+    img{
+       height:$small-icon-len * 1.5;
+       width:$small-icon-len * 1.5;
+    }
 }
 
 .footer-heading {
@@ -171,13 +175,14 @@
 //About page
 #contact-links{
   text-align: center;
+  font-size:8px;
   #contact-link-images{
     display: block;
     margin: 0 auto;
 
     a{ display: inline-block; }
+    a:hover{ background-color: $grey-color-light}
   }
-  font-size:10px;
 }
 
 /**
@@ -272,12 +277,10 @@ a.nice-underline{
 
 #social-media-share-btns{
   a{
-    height:16px;
-    width:16px;
     text-decoration: none;
     img{
-      height:16px;
-      width:16px;
+      height: $small-icon-len;
+      width: $small-icon-len;
       display: inline-block;
       vertical-align: middle;
       border: none;

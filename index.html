@@ -13,12 +13,10 @@ layout: default
 
         {% include post-meta.html date=post.date%}
 
-        <p>{{ post.blurb }} <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link">Read more...</a> </p>
+        <p>{{ post.blurb }} <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link nice-underline">Read more...</a> </p>
 
       </li>
     {% endfor %}
   </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
 
 </div>

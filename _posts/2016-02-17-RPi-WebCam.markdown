@@ -6,9 +6,9 @@ blurb: "Learn how to set up 24/7 video monitoring with a Raspberry Pi. Setup and
 keywords: "raspberry,pi"
 date:   2016-02-17 18:58:16 -0500
 author: James Lowrey
-categories: raspberry-pi apache hardware
+categories: hardware
 introduction: |
-  Problem: SO misses her dog when she's away from the house. I need a Valentine's day present.             
+  Problem: The GF misses her dog when she's away from the house. I need a Valentine's day present.
 
   Solution: Over engineering!                                             
 

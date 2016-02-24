@@ -5,4 +5,4 @@ permalink: /about/
 ---
 
 
-{% include contact.html %}
+{% include contact-link-btns.html %}
