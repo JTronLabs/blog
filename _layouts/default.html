@@ -8,9 +8,13 @@
     {% include header.html %}
 
     <div class="page-content">
+      {% unless page.no-wrap %}
       <div class="wrapper">
         {{ content }}
       </div>
+      {% else %}
+        {{ content }}
+      {% endunless %}
     </div>
 
     {% include footer.html %}

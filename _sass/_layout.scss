@@ -1,3 +1,4 @@
+
 /**
  * Site header
  */
@@ -173,16 +174,13 @@
 }
 
 //About page
-#contact-links{
+.contact-links-btns{
   text-align: center;
-  font-size:8px;
-  #contact-link-images{
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 
-    a{ display: inline-block; }
-    a:hover{ background-color: $grey-color-light}
-  }
+  a{ display: inline-block; }
+  a:hover{ background-color: $grey-color-light}
 }
 
 /**
@@ -192,29 +190,6 @@
     padding: $spacing-unit 0;
 }
 
-.post-list {
-    margin-left: 0;
-    list-style: none;
-    text-align: center;
-
-    > li {
-        margin-bottom: $spacing-unit;
-        p{
-          text-align: left;
-        }
-        h2{
-          a{ color: $text-color; text-decoration: none; }
-          a:hover{background-color: $grey-color-light;}
-        }
-    }
-}
-
-.post-meta {
-    font-size: $small-font-size;
-    color: $grey-color;
-    text-align: center;
-    padding-bottom: $spacing-unit/2;
-}
 
 //append this to an <a> tag
 a.text_like_link{
@@ -275,6 +250,12 @@ a.nice-underline{
   }
 }
 
+
+
+
+/**
+  * Icons
+  */
 #social-media-share-btns{
   a{
     text-decoration: none;
@@ -294,16 +275,81 @@ a.nice-underline{
   }
 }
 
-
+#accreditation{
+  text-align: left;
+  img{
+    height: $small-icon-len;
+    width: $small-icon-len;
+    display: inline-block;
+    border:none;
+  }
+  .contact-links-btns{
+    text-align: left;
+  }
+}
 
 /**
  * Posts
  */
+
+.post{
+   background-color: $background-color;
+}
+
 .post-header {
     margin-bottom: $spacing-unit;
     text-align: center;
 }
 
+.home{
+  text-align: center;
+}
+.card{
+    margin: $spacing-unit / 2;
+    width: $card-len;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: $index-card-border-radius;
+    overflow: hidden;
+    text-align: center;
+
+    .card-img-wrap{
+      display: block;
+      background-color: black;
+      img{
+        height: $card-len/2;
+      }
+    }
+    .card-content{
+       background-color: $grey-color-light;
+       padding:$spacing-unit / 2;
+
+       p{
+         display: none;
+       }
+       h2{
+         font-weight: bold;
+         font-size: 1.4rem;
+       }
+       time{
+         font-size: .85rem;
+       }
+    }
+}
+.card:hover{
+  .card-content{
+     p{
+       display: block;
+     }
+  }
+}
+
+.post-meta {
+    font-size: $small-font-size;
+    color: $grey-color;
+    text-align: center;
+    padding-bottom: $spacing-unit/2;
+}
 .post-title {
     font-size: 2.2rem;
     letter-spacing: -1px;

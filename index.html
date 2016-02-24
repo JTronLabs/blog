@@ -1,22 +1,25 @@
 ---
 layout: default
+no-wrap: true
 ---
 
 <div class="home">
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <h2>
-          <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
+  {% for post in site.posts %}
 
-        {% include post-meta.html date=post.date remove_social_btns=true %}
+      <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link card">
+        <div class="card-img-wrap">
+          <img src="{{post.profile-img-src}}" alt="{{ post.title }}">
+        </div>
+        <div class="card-content">
+          <h2>{{ post.title }}</h2>
 
-        <p>{{ post.blurb }} <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link nice-underline">Read more...</a> </p>
+          <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time>
 
-      </li>
-    {% endfor %}
-  </ul>
+          <p>{{ post.blurb }}</p>
+        </div>
+      </a>
+
+  {% endfor %}
 
 </div>

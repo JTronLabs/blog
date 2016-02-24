@@ -1,3 +1,5 @@
+{% if include.title and include.url %}
+
 <div id="social-media-share-btns">
     <a href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ page.url }}&via={{ site.twitter_username }}&related={{ site.twitter_username }}" rel="nofollow" target="_blank" title="Share on Twitter">
       <img src="/img/twitter_icon.png" alt="Twitter">
@@ -15,9 +17,9 @@
       <img src="/img/reddit_icon.png" alt="Reddit">
     </a>
     <!--
-    <a href="http://www.iconarchive.com/" class="text_like_link">Source</a>
-
     https://developers.google.com/+/web/+1button/
       <div class="g-plusone" data-width="300"></div>
     -->
 </div>
+
+{% endif %}
