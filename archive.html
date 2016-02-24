@@ -7,19 +7,25 @@ permalink: /archive/
 <!-- Create a markdown string that will represent the list out of the posts. Then
 print the string. Attempting to print the markdown in the loop directly results in messed up HTML-->
 
-{% assign list = "" %}
-
-{% for post in site.posts %}
-  {% capture list %}
-
-{{ list }}
-- ###[{{ post.title }}]({{ post.url | prepend: site.baseurl }})
-
-  {% endcapture %}
-{% endfor %}
+{% capture current_date %}{{ site.posts[0].date | date: "%b %Y" }}{% endcapture %}
 
 <section id="archive-list">
-{% markdown %}
-{{ list }}
-{% endmarkdown %}
+  <h2>{{ current_date }}</h2>
+  <ul>
+    {% for post in site.posts %}
+      {% capture new_date %}{{ post.date | date: "%b %Y" }}{% endcapture %}
+      {% if new_date != current_date %}
+        {% assign current_date = new_date %}
+        </ul>
+        <h2>{{ current_date }}</h2>
+        <ul>
+      {% endif %}
+        <li>
+          <h3 class="link-title">
+            <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link">{{ post.title }}</a>
+          </h3>
+          <span class="date">{{ post.date | date: "%b %-d, %Y" }}</span>
+        </li>
+    {% endfor %}
+  </ul>
 </div>

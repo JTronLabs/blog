@@ -214,25 +214,80 @@
 //append this to an <a> tag
 a.text_like_link{
   &:link, &:visited {
-    border-bottom: 1px dotted #ccc;
     text-decoration: none;
     color: $text-color;
   }
-
-  &:hover { background-color: $grey-color-light; }
+  &:hover, &:visited:hover {
+    background-color: $grey-color-light;
+    color: $text-color;
+  }
 }
+a.nice-underline{
+  &:link, &:visited, &:hover, &:visited:hover {
+    border-bottom: 1px dotted #ccc;
+  }
+}
+
 
 
 /**
   * Archive Page
   */
 #archive-list{
+  //for the dates separating the posting lists
+  h2{
+    font-size: 1.4rem;
+
+    @include media-query($on-laptop) { font-size: 1.2rem; }
+  }
+
+  //lists of posts
   ul{
     list-style: none;
+    li{
+      border-bottom: 1px dashed #ccc;
+      padding:$spacing-unit/2 0;
+      h3{
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin:0;
+        padding:0;
+        display: inline-block;
+        @include media-query($on-laptop) {//push date below
+          font-size: 1.1rem;
+          display: block;
+        }
+      }
+      .date{
+        float:right;
+        color: $grey-color;
+        @include media-query($on-laptop) {//push date below
+            float:none;
+        }
+      }
+      ::after{clear:both;} //float clear fix
+    }
   }
 }
 
-
+#social-media-share-btns{
+  a{
+    height:16px;
+    width:16px;
+    text-decoration: none;
+    img{
+      height:16px;
+      width:16px;
+      display: inline-block;
+      vertical-align: middle;
+      border: none;
+      border-radius: 0px;
+    }
+    img:hover{
+      border: 1px solid black;
+    }
+  }
+}
 
 
 
