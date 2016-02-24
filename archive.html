@@ -1,0 +1,25 @@
+---
+layout: page
+title: Archive
+permalink: /archive/
+---
+
+<!-- Create a markdown string that will represent the list out of the posts. Then
+print the string. Attempting to print the markdown in the loop directly results in messed up HTML-->
+
+{% assign list = "" %}
+
+{% for post in site.posts %}
+  {% capture list %}
+
+{{ list }}
+- ###[{{ post.title }}]({{ post.url | prepend: site.baseurl }})
+
+  {% endcapture %}
+{% endfor %}
+
+<section id="archive-list">
+{% markdown %}
+{{ list }}
+{% endmarkdown %}
+</div>

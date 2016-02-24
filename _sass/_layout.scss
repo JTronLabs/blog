@@ -114,7 +114,6 @@
     margin-bottom: $spacing-unit / 2;
 }
 
-.contact-list,
 .social-media-list {
     list-style: none;
     margin-left: 0;
@@ -222,6 +221,18 @@ a.text_like_link{
 
   &:hover { background-color: $grey-color-light; }
 }
+
+
+/**
+  * Archive Page
+  */
+#archive-list{
+  ul{
+    list-style: none;
+  }
+}
+
+
 
 
 
