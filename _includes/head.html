@@ -3,7 +3,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="
   {% if page.blurb %}
     {{ page.blurb | strip_html | strip_newlines | truncate: 160 }}
@@ -22,8 +21,18 @@
     James Lowrey
   {% endif %}">
 
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <link rel="icon" href="{{ "/img/favicon.ico" | prepend: site.baseurl }}" sizes="16x16"> 
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+  <!-- Prism syntax highlighter : http://prismjs.com/download.html -->
+  <link href="{{ "/css/prism.css" | prepend: site.baseurl }}" rel="stylesheet" />
+	<script src="{{ "/js/prism.js" | prepend: site.baseurl }}"></script>
+
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">

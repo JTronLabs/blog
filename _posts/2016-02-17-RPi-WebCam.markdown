@@ -9,13 +9,13 @@ author: James Lowrey
 profile-img-src: "/img/viira.jpg"
 categories: hardware
 introduction: |
+  ![Viira](/img/viira.jpg)
+
   Problem: The GF misses her dog when she's away from the house. I need a Valentine's day present.
 
   Solution: Over engineering!                                             
 
   Enter the Raspberry Pi Survellience System. Using the R-Pi's cheap hardware and a generic USB webcam, you can construct a basic home-survellience system, for pets or theft-prevention.
-
-  ![Viira](/img/viira.jpg)
 
 resources: >
               - [Raspberry Pi Webcam Docs](https://www.raspberrypi.org/documentation/usage/webcams)
@@ -58,6 +58,7 @@ tutorial_steps: ["Setup your Raspberry Pi",
               "Turn Camera On/Off Automatically"
             ]
 ---
+ 
 
 {::options parse_block_html="true" /}
 <div class="collapsable">
@@ -91,9 +92,9 @@ sudo iwlist wlan0 scan #scan for local wifi networks. "ESSID" values are the nam
 
 to find your Wi-Fi's ESSID value. Next, edit the wpa_supplicant to add an entry for your Wi-Fi
 
-{% highlight bash %}
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf #add new entry to known wifi's
 
+{% highlight bash %}
 #Go to the bottom of the file and add the following:
 network={
     ssid="The_ESSID_from_earlier"

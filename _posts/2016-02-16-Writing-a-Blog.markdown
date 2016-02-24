@@ -32,6 +32,8 @@ resources: >
 
               - [Letting Markdown work in any File](https://github.com/imathis/jekyll-markdown-block)
 
+              - [Prisim Syntax Highlighting](http://prismjs.com/index.html)
+
 
 software_versions: >
               - [Ubuntu 14.04.4 LTS](http://www.ubuntu.com/download)
