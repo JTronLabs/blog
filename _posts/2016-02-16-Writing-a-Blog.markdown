@@ -42,3 +42,8 @@ software_versions: >
 
               - [Jekyll 3.1.1](http://jekyllrb.com/docs/installation/)
 ---
+
+
+<!-- Required first line cannot be in a liquid Template due to Jekyll 'tag was never closed' bug
+ bug info:: http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed/
+-->

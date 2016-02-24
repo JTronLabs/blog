@@ -3,16 +3,18 @@
 
 <nav id="{{ include.title | downcase | replace:' ','_' }}" class="collapsable">
 
-  <h4>{{include.title}}</h4>
-
-  <div class="collapsables_content">
-
-{% markdown %}
-{{ include.links }}
-{% endmarkdown %}
-
-
+  <div class="collapsable-title">
+  {% markdown %}
+####{{ include.title }}
+  {% endmarkdown %}
   </div>
+
+  <div class="collapsable-content">
+  {% markdown %}
+{{ include.links }}
+  {% endmarkdown %}
+  </div>
+
 </nav>
 
 

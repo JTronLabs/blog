@@ -380,9 +380,13 @@ a.nice-underline{
     }
 
     .collapsable{
-      border: 2px solid #ccc;
       padding:5px;
       margin: 5px;
+    }
+
+    .collapsed{
+      cursor: pointer;
+      border: 2px solid #ccc;
     }
 
     #tutorial_nav{

@@ -1,0 +1,22 @@
+{% if include.title and include.content %}
+
+
+
+<div class="collapsable">
+
+<div class="collapsable-title">
+{% markdown %}
+###{{ include.title }}
+{% endmarkdown %}
+</div>
+
+<div class="collapsable-content">
+{% markdown %}
+{{ include.content }}
+{% endmarkdown %}
+</div>
+
+</div>
+
+
+{% endif %}

@@ -58,12 +58,34 @@ tutorial_steps: ["Setup your Raspberry Pi",
               "Turn Camera On/Off Automatically"
             ]
 ---
- 
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
+<!-- Required first line cannot be in a liquid Template due to Jekyll 'tag was never closed' bug
+ bug info:: http://blog.slaks.net/2013-08-09/jekyll-tag-was-never-closed/
+-->
 
-### Install the Operating System
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
 
 The Pi itself is a full fledged computer, with much more RAM and processing power than a [microcontroller](https://en.wikipedia.org/wiki/Microcontroller) like Arduinio. Thus, the Pi requires an Operating System (OS) for software to interface with its hardware. [Linux](https://en.wikipedia.org/wiki/Linux) is an free, open-source OS with a ton of varieties and [distributions](https://en.wikipedia.org/wiki/Linux_distribution), [Raspian](https://www.raspberrypi.org/downloads/raspbian/) is the one made specifically with the Pi in mind.
 
@@ -75,12 +97,34 @@ There are already a lot of great resources for installing an OS onto the Pi, and
 - [Tutorial](https://www.andrewmunsell.com/blog/getting-started-raspberry-pi-install-raspbian/)
 - [Another tutorial](http://www.makeuseof.com/tag/install-operating-system-raspberry-pi/)
 
-</div>
+{% endcapture %}
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
 
-### Connect to the Internet
+{% include collapsable.html title="Install the Operating System" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
 
 If you have the ethernet cable, plug in the Pi and connect to it via SSH (covered in next section), then follow the instructions below to setup Wi-Fi.
 
@@ -102,12 +146,34 @@ network={
 }
 {% endhighlight %}
 
-</div>
+{% endcapture %}
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
 
-### Setup SSH
+{% include collapsable.html title="Connect to the Internet" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
 
 [Secure shell (SSH)](https://en.wikipedia.org/wiki/Secure_shell) is a way to securely access your Pi over the internet. Enabling SSH will prevent you from needing a dedicated keyboard and monitor to interface with the Pi, instead you can access it remotely from your day-to-day computer. The Pi will be running an SSH server, and you can connect to it from your computer similar to how you can connect to a web server with a browser. The main difference between the two being that SSH is a secure connection with root access (default [port](https://en.wikipedia.org/wiki/Port_%28computer_networking%29) #22), while HTTP is not (default port #80).
 
@@ -172,12 +238,33 @@ Lastly, you can try restarting the SSH server. Like a web-server, an SSH server 
 sudo service ssh restart #double check that SSH server is good to go
 {% endhighlight %}
 
-</div>
+{% endcapture %}
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
 
-### Update!
+{% include collapsable.html title="Setup SSH" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
 
 This part is easy. Ensure that your firmware and software are up-to-date by running these commands in the Pi's terminal. It will likely take the Pi awhile run.
 
@@ -189,12 +276,32 @@ sudo apt-get update #fetch new versions of Linux software
 sudo apt-get upgrade #apply the fetched updates
 {% endhighlight %}
 
-</div>
+{% endcapture %}
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
 
-### Setup Motion
+{% include collapsable.html title="Update" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
 
 [Motion](https://en.wikipedia.org/wiki/Motion_%28surveillance_software%29) is surveillance software written for Linux in [C](https://en.wikipedia.org/wiki/C_%28programming_language%29). It is strictly a [command-line](https://en.wikipedia.org/wiki/Command-line_interface) tool that can also be run as a  [daemon](https://en.wikipedia.org/wiki/Daemon_%28computing%29), making it perfect for a hands-off, embedded system. FYI, there are alternatives available that can do the same job ([ZoneMinder](https://zoneminder.com/) if you later wish to try different options.
 
@@ -227,13 +334,35 @@ sudo motion #run the motion program! If this doesn't work, try 'sudo /usr/local/
 
 Motion is now up and running! Ensure that it is working by entering {Pi-IP-ADDR}:8081 (assuming you did not change Motion's port in motion.conf) into your computer's browser (within your home's LAN). If your USB camera is plugged in then a video will be displayed, otherwise a gray rectangle will appear.
 
-</div>
+{% endcapture %}
 
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
+{% include collapsable.html title="Setup Motion" content = markdown_content_block %}
 
-### Setting up Static IP Address
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
 
 As I was figuring out this Motion stuff, I encountered a strange problem: randomly SSH stopped working. I checked that the Pi and my computer were connected to the internet and then checked the Pi's IP address. To my surprise found that it had changed! I tried to connect to the new IP and it still failed. Eventually I restarted the SSH server on the Pi, used the IP address the Pi gave me and it worked.
 
@@ -261,13 +390,36 @@ sudo reboot
 #log-in and check new inet address using
 ifconfig #or 'ip addr'
 {% endhighlight %}
+{% endcapture %}
 
-</div>
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
+{% include collapsable.html title="Setting up Static IP Address" content = markdown_content_block %}
 
-### Setting up Apache Web Server
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
+
 
 [Apache](https://en.wikipedia.org/wiki/Apache_HTTP_Server) is the world's most used web server software. It is one of the easiest to get a small site running and has a ton of documentation available. Apache, and all other HTTP web servers, run by default on port 80. Before, when we saw Motion's output by entering <Pi-IP>:8081 in the browser, we were accessing that port in our Pi. So for web servers, http://{IP} and http://{IP}:80 will give the same result.
 
@@ -322,12 +474,93 @@ service apache2 restart #restart the server
 
 Now your web server and your Motion server will be password protected! You can use different passwords and usernames for each if you wish.
 
-</div>
+{% endcapture %}
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
 
-### Make it Viewable on the Web
+{% include collapsable.html title="Setting up Apache Web Server" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
+
+As I was figuring out this Motion stuff, I encountered a strange problem: randomly SSH stopped working. I checked that the Pi and my computer were connected to the internet and then checked the Pi's IP address. To my surprise found that it had changed! I tried to connect to the new IP and it still failed. Eventually I restarted the SSH server on the Pi, used the IP address the Pi gave me and it worked.
+
+That extremely interesting story is given just to demonstrate that IPs are not static by default inside a LAN. Routers use something called [Dynamic Host Configuration Protocol (DHCP)](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) that automatically assigns IP addresses as devices enter and leave the LAN. If the addresses were all static, there would be a limited number of devices that could ever enter the LAN. There are [trade-offs](https://www.iplocation.net/static-vs-dynamic-ip-address) to having a static vs dynamic IP address, but in this application I believe a static one is better. Having the Pi maintain a static IP allows for easy & consistent SSH and web connections. Sticking with the default dynamic IP address will make your pi a bit more difficult for a home invader in your LAN to SSH into, but it will require the use of a [Dynamic Domain Name System (DDNS) service](https://en.wikipedia.org/wiki/Dynamic_DNS). When you enter a website name into the browser, [DNS name servers](https://en.wikipedia.org/wiki/Domain_Name_System) around the globe map the [URL](https://en.wikipedia.org/wiki/Uniform_Resource_Locator) text to the IP of the server you are attempting to connect to. With a dynamic IP you will need to pay for a service like [NoIP](http://www.noip.com/), [DynDNS](http://dyn.com/dns/) or [ComEXE (Chinese)](http://translate.google.com/translate?hl=en&sl=auto&tl=en&u=http%3A%2F%2Fwww.comexe.cn%2F). I have heard of a free solution called [DuckDNS](www.duckdns.org), but I have not tested it. Regardless, all these solutions increase complexity with a negligible security trade-off.
+
+I followed the instructions from [ModMyPi](http://www.modmypi.com/blog/tutorial-how-to-give-your-raspberry-pi-a-static-ip-address) to setup a static IP.
+
+{% highlight bash %}
+#setup static IP address on your Pi
+ifconfig #prints out info about your networking interfaces
+#write down inet addr (Pi's Current IP Address), Bcast (The Broadcast IP Range), Mask (Subnet Mask Address)
+netstat -nr #displays IP routing table
+#write down Gateway and destination addresses
+sudo nano /etc/network/interfaces #edit Pi's network interfaces. wlan0 if using Wi-Fi, eth0 if using ethernet
+#change 'iface eth0 inet dhcp' to 'iface eth0 inet static' or for wlan0, change 'iface default inet dhcp' to 'iface default inet static'
+#directly below that line, enter the following lines with the info gathered previously
+address 192.168.0.100 #address you wish to assign to Pi. Must be in network range, and is best to give the last number a high value to avoid taking another device's IP
+netmask 255.255.255.0 #Mask value from earlier
+network 192.168.0.0 #Destination address from earlier
+broadcast 192.168.0.255 #Bcast address from earlier
+gateway 192.168.0.1 #Gateway address from earlier
+#control-X, Y, Enter to exit and save the file in nano
+sudo rm /var/lib/dhcp/* #Remove any existing leases
+sudo reboot
+#log-in and check new inet address using
+ifconfig #or 'ip addr'
+{% endhighlight %}
+{% endcapture %}
+
+
+{% include collapsable.html title="Setting up Static IP Address" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
 
 So far, everything we've done has only been viewable in the local network. But what if you want to see your cameras from outside the house? Now that we have the stream and the site password protected, we can expose the site to the web. Don't tell many people about the site though! The more that people connect to your Pi (even without logging in) the more load it will have to process, and the more data you will use from your ISP.
 
@@ -355,12 +588,39 @@ At this point, I would also recommend adding a URL redirect record. Since port 8
 
 Don't forget to save them by clicking the 'Checkmark' icon.
 
-</div>
 
-{::options parse_block_html="true" /}
-<div class="collapsable">
+{% endcapture %}
 
-### Next Steps
+
+{% include collapsable.html title="Make it Viewable on the Web" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
+
 
 If you only want the video stream to be on at certain times, you can use a built-in Linux program called [Cron](https://en.wikipedia.org/wiki/Cron) to auto turn it on and off. The notation can be a bit tricky, but it's pretty easy to set up. Simply edit the crontab file and add entries for each on/off item. You can follow the instructions in the [Ubuntu community](https://help.ubuntu.com/community/CronHowto).
 
@@ -400,5 +660,7 @@ sudo crontab -e
 Beyond that there are a couple directions you can go. You can configure motion for [multiple USB Cameras](http://ubuntuforums.org/showthread.php?t=1897786), [save files](http://www.lavrsen.dk/foswiki/bin/view/Motion/FrequentlyAskedQuestions#How_do_I_disable_or_enable_saving_jpeg_files_when_motion_is_detected_63) when motion is detected, or  try out different video capturing software (like [ZoneMinder](https://zoneminder.com/)). Instead of having 2 password protected pages, you can embed the Motion stream on your web server without making it publicly available by itself. Then the only access to it would be through your web site. To do this you will need to proxy the stream to your web page with [MJPEG Proxy Grab](http://www.lavrsen.dk/foswiki/bin/view/Motion/MjpegProxyGrab).
 
 That's it! Thanks for checking out the post today, best of luck!
+{% endcapture %}
 
-</div>
+
+{% include collapsable.html title="Next Steps" content = markdown_content_block %}
