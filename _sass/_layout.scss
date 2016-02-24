@@ -278,6 +278,8 @@ a.nice-underline{
 #social-media-share-btns{
   a{
     text-decoration: none;
+    font-size: 5px;
+    vertical-align: bottom;
     img{
       height: $small-icon-len;
       width: $small-icon-len;

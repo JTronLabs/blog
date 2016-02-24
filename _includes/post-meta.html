@@ -6,5 +6,7 @@
   -->
   By <a href="/about" class="text_like_link nice-underline">James Lowrey</a> |
   <time datetime="{{ include.date | date_to_xmlschema }}" itemprop="datePublished">{{ include.date | date: "%b %-d, %Y" }}</time>
-  {% include social-media-share-post.html %}
+  {% unless include.remove_social_btns %}
+    {% include social-media-share-post.html %}
+  {% endunless %}
 </div>

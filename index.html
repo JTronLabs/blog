@@ -11,7 +11,7 @@ layout: default
           <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
 
-        {% include post-meta.html date=post.date%}
+        {% include post-meta.html date=post.date remove_social_btns=true %}
 
         <p>{{ post.blurb }} <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link nice-underline">Read more...</a> </p>
 
