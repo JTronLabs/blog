@@ -45,6 +45,7 @@ function collapseParagraphHandler(){
 
     //Using markdown, <img> tags are auto wrapped in <p> tags. I want to show images though. Thus do not hide the <p> if there is an image within it
     $('p').not(':has(img)').hide();
+    $('#introduction').children().show(); //leave the intro visible so the buttons dont move around on the screen (they are below the intro)
 
   }
   p_collapsed = !p_collapsed;

@@ -47,16 +47,9 @@ materials: >
 
               - [Ethernet Cable](http://www.amazon.com/AmazonBasics%C2%A0RJ45%C2%A0Cat-6-Ethernet%C2%A0Patch-Cable--%C2%A010%C2%A0Feet-3%C2%A0Meters/dp/B00N2VIALK/ref=sr_1_2?s=pc&ie=UTF8&qid=1456176588&sr=1-2) or [Monitor](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dcomputers&field-keywords=hdmi+monitor&rh=n%3A541966%2Ck%3Ahdmi+monitor)+[USB Keyboard](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dcomputers&field-keywords=usb+keyboard&rh=n%3A541966%2Ck%3Ausb+keyboard)+[HDMI cable](http://www.amazon.com/AmazonBasics-High-Speed-HDMI-Cable-Supports/dp/B00870ZHCQ/ref=sr_1_4?s=pc&ie=UTF8&qid=1456176643&sr=1-4&keywords=hdmi+cable)
 
-tutorial_steps: ["Setup your Raspberry Pi",
-              "Connect to the Internet",
-              "Setup SSH",
-              "Set Up a Static LAN IP Address",
-              "Update Pi and Install Motion",
-              "Setup Apache Web Server",
-              "Link Video Feed to Web Page",
-              "Enable Password Protection",
-              "Turn Camera On/Off Automatically"
-            ]
+
+software_versions: >
+              - [Motion Git-28b7cb2a4297c78b9c08c9ce29a648aeb22120d0,](https://github.com/sackmotion/motion)
 ---
 
 <!-- Required first line cannot be in a liquid Template due to Jekyll 'tag was never closed' bug
@@ -266,7 +259,7 @@ sudo service ssh restart #double check that SSH server is good to go
 
 {% capture markdown_content_block %}
 
-This part is easy. Ensure that your firmware and software are up-to-date by running these commands in the Pi's terminal. It will likely take the Pi awhile run.
+This part is easy. Ensure that your firmware and software are up-to-date by running these commands in the Pi's terminal. It will likely take the Pi awhile to run.
 
 {% highlight bash %}
 #updating pi
@@ -319,7 +312,7 @@ sudo mv /usr/local/etc/motion-dist.conf /usr/local/etc/motion.conf #must rename 
 
 If you want more info about this process, [here](https://robots.thoughtbot.com/the-magic-behind-configure-make-make-install) is a good blog I found detailing the commands a bit more.
 
-Next up is editing Motion's configuration file. Here is where we can change the quality of the camera, enable web streaming, enable web authentication, etc. For all the configuration options, check [here](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigFileOptions). When you  edit the config file, there should be a lot of options and comments explaining them already there. If not, you can copy+paste the [default config file](https://github.com/sackmotion/motion/blob/master/motion-dist.conf.in) from Motion's GitHub Repo. You can check my motion.conf file on GitHub [here](). Check out the default file, my file, and fiddle with options to see what you like.
+Next up is editing Motion's configuration file. Here is where we can change the quality of the camera, enable web streaming, enable web authentication, etc. For all the configuration options, check [here](http://www.lavrsen.dk/foswiki/bin/view/Motion/ConfigFileOptions). When you  edit the config file, there should be a lot of options and comments explaining them already there. If not, you can copy+paste the [default config file](https://github.com/sackmotion/motion/blob/master/motion-dist.conf.in) from Motion's GitHub Repo. You can check my motion.conf file on GitHub [here](https://github.com/JTronLabs/Motion-Surveillance-Project). Check out the default file, my file, and fiddle with options to see what you like.
 
 Here are some of the useful options and what they do: daemon on (background mode), height or width (resolution), webcam_quality (jpeg compression) stream_maxrate and framerate (sets framerate), stream_authentication and stream_auth_method (enable authentication), webcam_localhost and control_localhost (turn off to allow motion to stream to non-localhost).
 
@@ -664,3 +657,60 @@ That's it! Thanks for checking out the post today, best of luck!
 
 
 {% include collapsable.html title="Next Steps" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
+
+After setting this up, I had an issue with
+
+{% highlight bash %}
+sudo service motion stop
+motion: unrecognized service #WTF?
+{% endhighlight %}
+
+However, 'sudo motion' still worked to start the program. Thus I could turn on motion but could not shut it down. After much Googling, I discovered this was an issue with Motion's [init.d](http://www.ghacks.net/2009/04/04/get-to-know-linux-the-etcinitd-directory/) script (responsible for registering and stating daemons). I guess using the Git installation process messed it up somehow, and after some tweaking I got it to work. Here's what you do:
+
+{% highlight bash %}
+sudo nano /etc/init.d/motion #then copy+paste the text from [motion.init-Debian.in](https://github.com/sackmotion/motion/blob/master/motion.init-Debian.in) in the GitHub repo
+
+sudo chmod 755 /etc/init.d/motion 	    #make motion init.d script executable
+sudo chown root:root /etc/init.d/motion #owner and group owner of the file is root
+sudo update-rc.d motion defaults 	      #enable script to be run when system starts/stops
+
+#edit /etc/init.d/motion
+	#change the NAME, DAEMON, and PIDFILE variables at the top of the file. Leave 'PATH' as it is
+	NAME=motion
+	PATH=/bin:/usr/bin:/sbin:/usr/sbin
+	DAEMON=/usr/local/bin/motion
+	PIDFILE=/var/run/motion/$NAME.pid
+	#...
+	#In the start) section,
+	start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON --chuid root #change 'motion' at end of this line to root    
+	#In the restart-motion) section,
+	start-stop-daemon --start --pidfile $PIDFILE --exec $DAEMON --chuid root #change 'motion' at end of this line to root    
+{% endhighlight %}
+
+After running the cmds and editing the init.d file 'motion' will be registered as a daemon, and will run on boot. Hopefully this error doesn't happen to anyone else, but if it does it can now be easily fixed!
+
+{% endcapture %}
+
+
+{% include collapsable.html title="Updates" content = markdown_content_block %}
