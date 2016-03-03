@@ -306,7 +306,8 @@ a.nice-underline{
 }
 .card{
     margin: $spacing-unit / 2;
-    width: $card-len;
+    max-width: $card-len;
+    width:80%;
     display: inline-block;
     vertical-align: top;
     border-radius: $index-card-border-radius;
