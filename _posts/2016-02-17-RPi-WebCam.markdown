@@ -74,6 +74,9 @@ software_versions: >
 
 
 
+
+
+
 {% capture markdown_content_block %}
 
 The Pi itself is a full fledged computer, with much more RAM and processing power than a [microcontroller](https://en.wikipedia.org/wiki/Microcontroller) like Arduinio. Thus, the Pi requires an Operating System (OS) for software to interface with its hardware. [Linux](https://en.wikipedia.org/wiki/Linux) is an free, open-source OS with a ton of varieties and [distributions](https://en.wikipedia.org/wiki/Linux_distribution), [Raspian](https://www.raspberrypi.org/downloads/raspbian/) is the one made specifically with the Pi in mind.
