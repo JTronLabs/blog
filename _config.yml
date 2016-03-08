@@ -10,10 +10,10 @@ title: JTronLabs
 email: jtronlabs@gmail.com
 description: >
   idea.toAction().toResult().toString( )
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "http://jtronlabs.github.io/blog" # the base hostname & protocol for your site
 github_username:  jtronlabs
-twitter_username: jtronlabs 
+twitter_username: jtronlabs
 
 # Build settings
 markdown: kramdown
