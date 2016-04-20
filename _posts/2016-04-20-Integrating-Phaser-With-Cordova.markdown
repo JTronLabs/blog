@@ -12,6 +12,23 @@ introduction: |
   Coming soon
 
 resources: >
+  - [Cordova Overview](https://cordova.apache.org/docs/en/latest/guide/overview/)
+
+  - [Cordova 'Hello World'](https://cordova.apache.org/docs/en/latest/guide/cli/index.html)
+
+  - [Cordova on Android](https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html)
+
+  - [Phaser 'Hello World'](http://phaser.io/tutorials/getting-started/index)
+
+  - [Phaser 2.4.6 docs](http://phaser.io/docs/2.4.6/index)
+
+  - [Phaser Flappy Bird](http://www.codevinsky.com/phaser-2-0-tutorial-flappy-bird-part-1/)
+
+  - [Phaser Official Tutorials](http://phaser.io/learn/official-tutorials)
+
+  - [Phaser Official Tutorials - GitHub](https://github.com/photonstorm/phaser-coding-tips)
+
+  - [Phaser Community Tutorials](http://phaser.io/learn/community-tutorials)
 
 
 software_versions: >

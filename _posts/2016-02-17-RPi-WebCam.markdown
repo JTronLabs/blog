@@ -9,7 +9,6 @@ author: James Lowrey
 profile-img-src: "viira.jpg"
 categories: hardware
 introduction: |
-  ![Viira]( {{site.baseurl}}/img/viira.jpg)
 
   Problem: The GF misses her dog when she's away from the house. I need a Valentine's day present.
 
