@@ -9,7 +9,7 @@ no-wrap: true
 
       <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link card">
         <div class="card-img-wrap">
-          <img src="{{post.profile-img-src}}" alt="{{ post.title }}">
+          <img src="{{ site.baseurl }}/img/{{post.profile-img-src}}" alt="{{ post.title }}">
         </div>
         <div class="card-content">
           <h2>{{ post.title }}</h2>

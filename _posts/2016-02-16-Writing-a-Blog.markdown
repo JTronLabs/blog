@@ -4,7 +4,7 @@ title:  "Creating a free blog with Jekyll"
 title-subtext: "For spouting political opinions!"
 blurb: "Utilize Jekyll, Liquid, YAML, SCSS, CSS, JS, HTML, Ruby, Kramdown, Markdown, Github-Pages, and many more buzzwords to create a static website. "
 date:   2016-02-16 18:58:16 -0500
-profile-img-src: "/img/jekyll-logo.png"
+profile-img-src: "jekyll-logo.png"
 categories: jekyll update
 introduction: >
 
