@@ -21,7 +21,7 @@ introduction: >
   - Posts can be written from a text editor, IDE, GitHub's web editor, or even the command line. No need to log-in to a website if you don't want to.
 
   - Blog is version-controlled through Git. This allows easy rollback, backups, drafting, and prototyping for new posts/layouts.
-  
+
   - Site is static, not dynamic. Thus does not require ongoing maintenance (e.g. backups, databases, security updates) or learning the intricacies of an engine like WordPress or Mephisto.
 
 resources: >
@@ -46,8 +46,6 @@ resources: >
               - [Liquid for Designers](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
 
               - [Using Jekyll Plug-ins](http://jekyllrb.com/docs/plugins/)
-
-              - [Letting Markdown work in any File](https://github.com/imathis/jekyll-markdown-block)
 
               - [Prisim Syntax Highlighting](http://prismjs.com/index.html)
 

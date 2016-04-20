@@ -4,15 +4,11 @@
 <nav id="{{ include.title | downcase | replace:' ','_' }}" class="collapsable">
 
   <div class="collapsable-title">
-  {% markdown %}
-####{{ include.title }}
-  {% endmarkdown %}
+{{ include.title | prepend: '####'|  markdownify}}
   </div>
 
   <div class="collapsable-content">
-  {% markdown %}
-{{ include.links }}
-  {% endmarkdown %}
+{{ include.links | markdownify}}
   </div>
 
 </nav>

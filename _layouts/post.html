@@ -13,11 +13,7 @@ layout: default
 
   <div class="post-content" itemprop="articleBody">
     <div id="introduction">
-
-{% markdown %}
-{{ page.introduction }}
-{% endmarkdown %}
-
+{{ page.introduction |  markdownify}}
     </div>
 
     {% include nav_btns.html %}
