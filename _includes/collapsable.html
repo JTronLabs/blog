@@ -5,7 +5,8 @@
 <div class="collapsable">
 
 <div class="collapsable-title"  markdown="1">
-{{ include.title | prepend: '###' |  markdownify}}
+{% include.title | prepend: '###' %}
+{{ include.title |  markdownify}}
 </div>
 
 <div class="collapsable-content"  markdown="1">

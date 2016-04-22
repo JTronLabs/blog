@@ -18,6 +18,8 @@ resources: >
 
   - [Cordova on Android](https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html)
 
+  - [Installing KVM (for AVDs)](https://help.ubuntu.com/community/KVM/Installation)
+
   - [Phaser 'Hello World'](http://phaser.io/tutorials/getting-started/index)
 
   - [Phaser 2.4.6 docs](http://phaser.io/docs/2.4.6/index)

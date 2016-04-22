@@ -4,7 +4,8 @@
 <nav id="{{ include.title | downcase | replace:' ','_' }}" class="collapsable">
 
   <div class="collapsable-title">
-{{ include.title | prepend: '####'|  markdownify}}
+{% include.title | prepend: '####' %}
+{{ include.title | markdownify}}
   </div>
 
   <div class="collapsable-content">
