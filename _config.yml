@@ -11,6 +11,7 @@ email: jtronlabs@gmail.com
 description: >
   developer.toString()
 baseurl: "/blog" # the subpath of your site, e.g. /blog
+permalink: none
 url: "http://jtronlabs.github.io" # the base hostname & protocol for your site
 github_username:  jtronlabs
 repository: JTronLabs / blog
