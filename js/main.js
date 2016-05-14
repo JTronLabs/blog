@@ -15,13 +15,13 @@ function collapseAllHandler(){
 
   if(all_collapsed){ //expand
     $('.collapsable').removeClass(" collapsed ");
-    $('#collapse-all-btn').html('Collapse</br>All');
+    $('#collapse-all-btn').html('Collapse<br/>All');
     $('#collapse-all-btn').prop('title', 'Hide all content');
 
     $('.collapsable-content').show();
   }else{ //collapse
     $('.collapsable').addClass(" collapsed ");
-    $('#collapse-all-btn').html('Expand</br>All');
+    $('#collapse-all-btn').html('Expand<br/>All');
     $('#collapse-all-btn').prop('title', 'Show all content');
 
 
@@ -34,13 +34,13 @@ function collapseParagraphHandler(){
   if(all_collapsed){ collapseAllHandler(); }//need to reset with respect to all content
 
   if(p_collapsed){ //expand
-    $('#collapse-p-btn').text('Advanced Users');
+    $('#collapse-p-btn').html('Hide<br/>Background');
     $('#collapse-p-btn').prop('title', 'Hide paragraphs');
 
     $('p').show();
 
   }else{ //collapse
-    $('#collapse-p-btn').text('Beginner Users');
+    $('#collapse-p-btn').html('Show<br/>Background');
     $('#collapse-p-btn').prop('title', 'Show paragraphs');
 
     //Using markdown, <img> tags are auto wrapped in <p> tags. I want to show images though. Thus do not hide the <p> if there is an image within it
