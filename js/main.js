@@ -7,6 +7,7 @@ $( document ).ready(function() {
   $('#collapse-all-btn').on( "click", collapseAllHandler );
   $('#collapse-p-btn').on( "click", collapseParagraphHandler );
 
+  var collapsables = document.getElementsByClassName('collapsable');
   $('.collapsable').on( "click", expandCollapsableOnClick );
 });
 
@@ -52,7 +53,11 @@ function collapseParagraphHandler(){
 }
 
 function expandCollapsableOnClick(){
-  $(this).removeClass("collapsed");
+  removeClassInPureJS(this,"collapsed");
 
   $(this).find(".collapsable-content").show();
+}
+
+function removeClassInPureJS(domObject,className){
+  domObject.className = domObject.className.replace(/\className\b/,'');
 }
