@@ -16,22 +16,22 @@ $spacing-unit:     30px;
 
 $text-color:       #444;
 $background-color: #fdfdfd;
-$brand-color:      #2a7ae2;
+$brand-color:      #CE6607; //link color
 
 $grey-color:       #828282;
-$grey-color-light: lighten($grey-color, 40%);
-$grey-color-dark:  darken($grey-color, 25%);
+$grey-color-light: lighten($grey-color, 20%);
+$grey-color-dark:  darken($grey-color, 15%);
 
-$footer-height:    100px;
-$small-icon-len:   16px;
+$baby-blue:       rgb(66, 184, 221);
+$baby-blue-dark:  darken($baby-blue, 25%);
+
+$footer-height:    120px;
+$icon-len:   16px;
 $card-len: 350px;
 $index-card-border-radius: 10px;
 
 //Post specific css styling
 $post-img-border-radius:   5px;
-$post-link-color:  #CE6607;
-$post-link-color-dark:  darken($post-link-color, 10%);
-$post-link-color-light:  lighten($post-link-color, 15%);
 
 // Width of the content area
 $content-width:    865px;
@@ -54,16 +54,12 @@ $on-laptop:        800px;
     }
 }
 
-.center-image{
-  text-align: center;
-  margin: 0 auto;
-  display: block;
-}
-
-
 // Import partials from `sass_dir` (defaults to `_sass`)
 @import
         "base",
         "layout",
-        "syntax-highlighting"
+        "syntax-highlighting",
+        "post",
+        "archive",
+        "cards"
 ;

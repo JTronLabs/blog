@@ -1,0 +1,85 @@
+
+.post-header {
+    margin: $spacing-unit;
+    text-align: center;
+}
+
+/**
+  * Icons
+  */
+#social-media-share-btns{
+  a{
+    text-decoration: none;
+    font-size: 5px;
+    vertical-align: bottom;
+    img{
+      height: $icon-len;
+      width: $icon-len;
+      display: inline-block;
+      vertical-align: middle;
+      border: none;
+      border-radius: 0px;
+    }
+    img:hover{
+      border: 1px solid black;
+    }
+  }
+}
+
+
+.post-meta {
+    font-size: $small-font-size;
+    color: $grey-color;
+    text-align: center;
+    padding-bottom: $spacing-unit/2;
+}
+
+.post-content {
+    .post-info{
+      border: 1px solid $grey-color-dark;
+      width:98%;
+      margin-bottom: $spacing-unit;
+      padding: 1%;
+    }
+    padding-bottom: $spacing-unit;
+
+    img{
+      border: 2px solid #ccc;
+      border-radius: $post-img-border-radius;
+    }
+
+    .collapsable{
+      padding:5px;
+      margin: 5px;
+      .collapsable-title{
+        text-align: center;
+      }
+    }
+
+    .collapsed{
+      cursor: pointer;
+      border: 2px solid #ccc;
+    }
+
+    #expand-btns{
+      button{
+        width:120px;
+      }
+    }
+
+    //link coloring and styling
+    nav{ //navs at top of page
+      a{color: #0077CC; text-decoration: none;}
+      a:hover{color: lighten(#0077CC, 10%);}
+    }
+}
+
+button {
+  background: $baby-blue;
+  border-radius: 10px;
+  color: white;
+}
+
+button:hover {
+  background: $baby-blue-dark;
+}

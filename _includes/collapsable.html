@@ -1,16 +1,23 @@
-{% if include.title and include.content %}
+{% if include.title %}
 
 
+<div class="collapsable" id="{{ include.title | downcase | replace:' ','_' }}">
 
-<div class="collapsable">
+  <div class="collapsable-title">
+    <h2>{{ include.title }}</h2>
+  </div>
 
-<div class="collapsable-title"  markdown="1">
-  <h3>{{ include.title }}</h3>
-</div>
+  {% if include.content %}
+      <div class="collapsable-content">
+{{ include.content | markdownify}}
+      </div>
+    {% endif %}
 
-<div class="collapsable-content"  markdown="1">
-{{ include.content |  markdownify}}
-</div>
+  {% if include.links %}
+    <div class="collapsable-content no-bullets">
+{{ include.links | markdownify}}
+    </div>
+  {% endif %}
 
 </div>
 

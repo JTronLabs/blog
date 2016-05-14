@@ -15,13 +15,13 @@ function collapseAllHandler(){
 
   if(all_collapsed){ //expand
     $('.collapsable').removeClass(" collapsed ");
-    $('#collapse-all-btn').text('Collapse All');
+    $('#collapse-all-btn').html('Collapse</br>All');
     $('#collapse-all-btn').prop('title', 'Hide all content');
 
     $('.collapsable-content').show();
   }else{ //collapse
     $('.collapsable').addClass(" collapsed ");
-    $('#collapse-all-btn').text('Expand All');
+    $('#collapse-all-btn').html('Expand</br>All');
     $('#collapse-all-btn').prop('title', 'Show all content');
 
 

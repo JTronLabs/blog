@@ -21,7 +21,7 @@ html {
 
 
 body {
-    margin: 0 0 $footer-height+$spacing-unit; /* bottom = footer height */
+    margin: 0 0 $footer-height+2*$spacing-unit; /* bottom = footer height */
 
     font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
     color: $text-color;

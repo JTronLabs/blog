@@ -1,0 +1,44 @@
+
+.card-container{
+  text-align: center;
+  .card{
+      margin: $spacing-unit / 2;
+      max-width: $card-len;
+      width:80%;
+      display: inline-block;
+      vertical-align: top;
+      border-radius: $index-card-border-radius;
+      overflow: hidden;
+      text-align: center;
+
+      .card-img-wrap{
+        display: block;
+        background-color: black;
+        img{
+          height: $card-len/2;
+        }
+      }
+      .card-content{
+         background-color: $grey-color-light;
+         padding:$spacing-unit / 2;
+
+         p{
+           display: none;
+         }
+         h2{
+           font-weight: bold;
+           font-size: 1.4rem;
+         }
+         time{
+           font-size: .85rem;
+         }
+      }
+  }
+  .card:hover{
+    .card-content{
+       p{
+         display: block;
+       }
+    }
+  }
+}

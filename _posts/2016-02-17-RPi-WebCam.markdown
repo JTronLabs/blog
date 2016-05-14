@@ -29,9 +29,9 @@ resources: >
 
               - [Static IP Address](http://www.modmypi.com/blog/tutorial-how-to-give-your-raspberry-pi-a-static-ip-address)
 
-              -[Password Protect Web Serve](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04)
+              - [Password Protect Web Serve](https://www.digitalocean.com/community/tutorials/how-to-set-up-password-authentication-with-apache-on-ubuntu-14-04)
 
-              -[Connect IP to Domain Name](https://www.namecheap.com/support/knowledgebase/article.aspx/1162/46/how-can-i-point-my-domain-name-to-my-home-servers-ip)
+              - [Connect IP to Domain Name](https://www.namecheap.com/support/knowledgebase/article.aspx/1162/46/how-can-i-point-my-domain-name-to-my-home-servers-ip)
 
 materials: >
               - [Raspberry Pi Model B](https://www.raspberrypi.org/products/raspberry-pi-2-model-b/)
@@ -47,7 +47,7 @@ materials: >
               - [Ethernet Cable](http://www.amazon.com/AmazonBasics%C2%A0RJ45%C2%A0Cat-6-Ethernet%C2%A0Patch-Cable--%C2%A010%C2%A0Feet-3%C2%A0Meters/dp/B00N2VIALK/ref=sr_1_2?s=pc&ie=UTF8&qid=1456176588&sr=1-2) or [Monitor](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dcomputers&field-keywords=hdmi+monitor&rh=n%3A541966%2Ck%3Ahdmi+monitor)+[USB Keyboard](http://www.amazon.com/s/ref=nb_sb_noss_2?url=search-alias%3Dcomputers&field-keywords=usb+keyboard&rh=n%3A541966%2Ck%3Ausb+keyboard)+[HDMI cable](http://www.amazon.com/AmazonBasics-High-Speed-HDMI-Cable-Supports/dp/B00870ZHCQ/ref=sr_1_4?s=pc&ie=UTF8&qid=1456176643&sr=1-4&keywords=hdmi+cable)
 
 software_versions: >
-              - [Motion Git-28b7cb2a4297c78b9c08c9ce29a648aeb22120d0,](https://github.com/sackmotion/motion)
+              - [Motion (Mar 17, 2014 commit)](https://github.com/sackmotion/motion)
 ---
 
 <!-- Required first line cannot be in a liquid Template due to Jekyll 'tag was never closed' bug
@@ -684,7 +684,7 @@ sudo service motion stop
 motion: unrecognized service #WTF?
 {% endhighlight %}
 
-However, 'sudo motion' still worked to start the program. Thus I could turn on motion but could not shut it down. After much Googling, I discovered this was an issue with Motion's [init.d](http://www.ghacks.net/2009/04/04/get-to-know-linux-the-etcinitd-directory/) script (responsible for registering and stating daemons). I guess using the Git installation process messed it up somehow, and after some tweaking I got it to work. Here's what you do:
+However, 'sudo motion' still worked to start the program. Thus I could turn on motion but could not shut it down. After much Googling, I discovered this was an issue with Motion's [init.d](http://www.ghacks.net/2009/04/04/get-to-know-linux-the-etcinitd-directory/) script (responsible for registering and stating [daemons](https://en.wikipedia.org/wiki/Daemon_%28computing%29)). I guess using the Git installation process messed it up somehow, and after some tweaking I got it to work. Here's what you do:
 
 {% highlight bash %}
 sudo nano /etc/init.d/motion #then copy+paste the text from [motion.init-Debian.in](https://github.com/sackmotion/motion/blob/master/motion.init-Debian.in) in the GitHub repo

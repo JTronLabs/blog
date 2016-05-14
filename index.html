@@ -3,23 +3,21 @@ layout: default
 no-wrap: true
 ---
 
-<div class="home">
+<section class="card-container">
+    {% for post in site.posts %}
 
-  {% for post in site.posts %}
+        <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link card">
+          <div class="card-img-wrap">
+            <img src="{{ site.baseurl }}/img/{{post.profile-img-src}}" alt="{{ post.title }}">
+          </div>
+          <div class="card-content">
+            <h2>{{ post.title }}</h2>
 
-      <a href="{{ post.url | prepend: site.baseurl }}" class="text_like_link card">
-        <div class="card-img-wrap">
-          <img src="{{ site.baseurl }}/img/{{post.profile-img-src}}" alt="{{ post.title }}">
-        </div>
-        <div class="card-content">
-          <h2>{{ post.title }}</h2>
+            <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time>
 
-          <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time>
+            <p>{{ post.blurb }}</p>
+          </div>
+        </a>
 
-          <p>{{ post.blurb }}</p>
-        </div>
-      </a>
-
-  {% endfor %}
-
-</div>
+    {% endfor %}
+</section>

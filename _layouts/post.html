@@ -16,11 +16,13 @@ layout: default
 {{ page.introduction |  markdownify}}
     </div>
 
-    {% include nav_btns.html %}
+    <section class="post-info center">
+      {% include nav_btns.html %}
 
-    {% include collapsable_external_links_list.html title="Resources and Further Reading" links=page.resources %}
-    {% include collapsable_external_links_list.html title="Materials Used" links=page.materials %}
-    {% include collapsable_external_links_list.html title="Software Versions" links=page.software_versions %}
+      {% include collapsable.html title="Resources and Further Reading" links=page.resources %}
+      {% include collapsable.html title="Materials Used" links=page.materials %}
+      {% include collapsable.html title="Software Versions" links=page.software_versions %}
+    </section>
 
     {{ content }}
 
