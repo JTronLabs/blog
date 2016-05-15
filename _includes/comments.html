@@ -22,18 +22,28 @@ gapi.comments.render(
 
 
 <!-- Using Facebook comments -->
+<div class="fb-comments" data-width="100%" data-numposts="5"></div>
 <div id="fb-root"></div>
-<div id="fb-comments" data-width="100%" data-numposts="5"></div>
 
-<script>(function(d, s, id) {
-  //The line below sets facebook comments source to the current page. This needs to be done in JS so we can use the current URL
-  document.getElementById("fb-comments").setAttribute("data-href",window.location.href);
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1722756551273927',
+      xfbml      : true,
+      version    : 'v2.6'
+    });
+  };
+  
+  (function(d, s, id) {
+    //The line below sets facebook comments source to the current page. This needs to be done in JS so we can use the current URL
+    document.getElementsByClassName("fb-comments")[0].setAttribute("data-href",window.location.href);
 
-  //The stuff below is boilerplate copied from the Facebook comments docs :: https://developers.facebook.com/docs/plugins/comments/
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+    //The stuff below is boilerplate copied from the Facebook comments docs :: https://developers.facebook.com/docs/plugins/comments/
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
 </script>
