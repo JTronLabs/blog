@@ -1,4 +1,4 @@
-{% if include.title %}
+{% if include.title and (include.content or include.links) %}
 
 
 <div class="collapsable" id="{{ include.title | downcase | replace:' ','_' }}">
