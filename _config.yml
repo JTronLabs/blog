@@ -17,14 +17,11 @@ github_username:  jtronlabs
 repository: JTronLabs / blog
 twitter_username: jtronlabs
 gems:
-  - jekyll-sitemap
-  - jekyll-feed
-  - jekyll-redirect-from
-  - jemoji
-  - jekyll-mentions
+  - github-pages
 
 
 # Build settings
 markdown: kramdown
 sass:
     style: compressed
+highlighter: rouge

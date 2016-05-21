@@ -29,7 +29,7 @@ resources: >
   - [Grunt Configuration](http://gruntjs.com/configuring-tasks)
 
 software_versions: >
-  - [Ubuntu 14.04.4 LTS](http://www.ubuntu.com/download)
+  - [Ubuntu 16.04 LTS](http://www.ubuntu.com/download)
 
   - [Phaser 2.4.7](http://phaser.io/)
 ---
@@ -88,9 +88,9 @@ You can view our generator [here](https://github.com/codevinsky/generator-phaser
 #Install generator dependencies. Install npm, then bower, then yo (in order to run our generator-phaser-official)
 sudo apt-get install nodejs #Web server
 sudo apt-get install npm #The NodeJS package manager
-npm install -g bower #package manager
-npm install -g yo #client-side dev stack, helps devs quickly build high quality web apps
-npm install -g grunt-cli #task-based command line build tool for JavaScript projects
+npm install -g --save-dev bower #package manager
+npm install -g --save-dev yo #client-side dev stack, helps devs quickly build high quality web apps
+npm install -g --save-dev grunt-cli #task-based command line build tool for JavaScript projects. 'save-dev' adds grunt as a dev-dependency to package.json
 
 sudo npm install -g yo generator-phaser-official #Desired YeoMan tool to auto-gen phaser game project
 
@@ -104,7 +104,8 @@ Now that we have our dependencies installed, we can generate our game:
 
 mkdir ~/Documents/birdu
 cd ~/Documents/birdu
-yo phaser-official #Generate a project in current directory
+yo phaser-official #Generate a project in current directory. Will download Phaser and node dependencies.
+#If a phaser-official project already exists in current dir, then option choices don't matter. Just choose to not overwrite your files
 #name of game is 'birdu'
 #Phaser version is 2.4.7 (at time of writing)
 #use 800x600 screen resolution
@@ -141,7 +142,7 @@ This Phaser game generator uses [Grunt](http://gruntjs.com) to compile your asse
 └── dist #compiled output saves to this folder
     └── index.html, assets/, css/, js/
 
-    {% endhighlight %}
+{% endhighlight %}
 
 If you're using Git for version control I recommended adding a .gitignore file of the auto-generated folders:
 

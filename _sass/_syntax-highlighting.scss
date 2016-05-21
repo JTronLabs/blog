@@ -1,8 +1,11 @@
+$code_radius:0.3em;
+
 /**
  * Syntax highlighting styles
  */
 .highlight {
-    background: #fff;
+    background: #272822;
+  	border-radius: $code_radius;
     @extend %vertical-rhythm;
 
     .highlighter-rouge & {
@@ -68,4 +71,39 @@
     .vg    { color: #008080 } // Name.Variable.Global
     .vi    { color: #008080 } // Name.Variable.Instance
     .il    { color: #099 } // Literal.Number.Integer.Long
+}
+
+
+
+code{
+	color: #f8f8f2;
+	border-radius: $code_radius;
+	padding: .3em;
+  background: #272822;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;//number of spaces in a tab
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none; //how to hyphenate when word-wrapping
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: $code_radius;
+      background: #272822;
 }
