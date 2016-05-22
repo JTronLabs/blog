@@ -41,9 +41,9 @@ software_versions: >
 
 {% capture markdown_content_block %}
 
-Regardless of your current skill level, Phaser is a great choice to develop your next (or first) game. One of its greatest strengths is the [documentation](http://phaser.io/docs/2.4.7/index) and available tutorials. The [offical tutorials](http://phaser.io/learn/official-tutorials), [community tutorials](http://phaser.io/learn/community-tutorials), and [specific examples](http://phaser.io/examples) give this engine a low learning curve, ultimately making your game quicker (and cheaper) to make. Phaser is not as powerful as AAA game engines like [Unity](https://unity3d.com/) or [UnrealEngine](https://www.unrealengine.com/) as it lacks 3D ([BabylonJS can do 3D though](http://www.babylonjs.com/)), a GUI, support staff, and it is not as well known, but it is 100% free. Whether you're an established business or an aspiring indie, using a free engine could add a lot of money to your pockets throughout your game's life.
+Regardless of your current skill level, Phaser is a great choice to develop your next (or first) game. One of its greatest strengths is the [documentation](http://phaser.io/docs/2.4.7/index) and available tutorials. The [offical tutorials](http://phaser.io/learn/official-tutorials), [community tutorials](http://phaser.io/learn/community-tutorials), and [specific examples](http://phaser.io/examples) give this engine a low learning curve, ultimately making your game quicker (and cheaper) to make. Phaser is not as powerful as AAA game engines like [Unity](https://unity3d.com/) or [UnrealEngine](https://www.unrealengine.com/) as it lacks 3D ([BabylonJS can do 3D though](http://www.babylonjs.com/)), a GUI, support staff, and it is not as well known, but it is 100% free. Whether you're an established business or an aspiring indie, using a free engine ([versus UE4 or Unity](http://blog.digitaltutors.com/whats-better-deal-unreal-engine-4-unity-5/)) will add money to your pockets throughout your game's life.
 
-Unlike writing native apps, Phaser does not lock you into one device. At the end of this series I use Cordova to publish on the Google Play Store, gaining access to a greater audience. These frameworks allow you to write once and publish multiple times, saving precious dev time. Unfortunately this process is a bit more involved than using AAA engines, but again it is free. Unfortuantely, apps written in this manner are less efficient than native apps, as they require a [WebView](https://cordova.apache.org/docs/en/latest/guide/overview/index.html#architecture) to run in the background and interpret the JS like a browser would. Usually for small apps this performance hit is minimal, and far preferable to having to re-write all the code multiple times.
+Unlike writing native apps, Phaser does not lock you into one device. At the end of this series I use Cordova to publish on the Google Play Store, gaining access to a greater audience. These frameworks allow you to write once and publish multiple times, saving precious dev time. While this process is more involved than using AAA engines it is extendible to any JS app, not just games. Unfortunately, apps written in this manner are less efficient than native apps, as they require a [WebView](https://cordova.apache.org/docs/en/latest/guide/overview/index.html#architecture) to run in the background and interpret the JS like a browser would. Usually for small apps this performance hit is minimal, and far preferable to having to re-write all the code multiple times.
 
 {% endcapture %}
 
@@ -165,3 +165,65 @@ dist/
 
 
 {% include collapsable.html title="Getting Started" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
+
+Browsers tend to be unhappy with loading assets into local files. Phaser requires a local web server in order to properly load assets and run the game. If you attempt to open the index.html file in the dist/ directory, it probably won't work, and will spit up some Uncaught SecurityError, Cross-Origin, and XMLHttpRequest cannot load errors in your JS console. This is an easy fix though! In my opinion, the easiest web server for Phaser is Apache2. Install with
+
+{% highlight bash %}
+#Install Apache Web server
+sudo apt-get install apache2
+{% endhighlight %}
+
+After that's done loading, you should see the default Apache web page by going to the url 'localhost' on a browser.
+
+![Default Apache2 Landing Page](../img/apache2-localhost.png)
+
+This code is located in the <code class=" language-markup">/var/www/html</code> directory. To run your Phaser game, you should copy your 'dist/' folder output to there. Below is a script (located in my game directory) for automatically copying build output to Apache localhost.
+
+{% highlight bash %}
+#!/bin/sh
+
+#Script that copies current game build to Apache web server html directory
+echo "deleting old files" #not 100% needed, but the generator won't delete old files/assets that are no longer used. It will only copy in new stuff you add. Thus I'm manually doing it here.
+rm -rf dist #build output folder
+sudo rm -rf /var/www/html/ #delete current contents of apache's web directory
+
+echo "copying new build to localhost"
+grunt build #compile js
+sudo cp -a $(pwd)/dist /var/www/html/ #copy over files to apache's web directory
+{% endhighlight %}
+
+After running the script, the default generator game should be playable at the URL 'localhost'.
+
+{% endcapture %}
+
+
+{% include collapsable.html title="Running The Game" content = markdown_content_block %}
