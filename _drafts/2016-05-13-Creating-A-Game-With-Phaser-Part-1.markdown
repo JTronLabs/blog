@@ -195,7 +195,7 @@ dist/
 
 {% capture markdown_content_block %}
 
-Browsers tend to be unhappy with loading assets into local files. Phaser requires a local web server in order to properly load assets and run the game. If you attempt to open the index.html file in the dist/ directory, it probably won't work, and will spit up some Uncaught SecurityError, Cross-Origin, and XMLHttpRequest cannot load errors in your JS console. This is an easy fix though! In my opinion, the easiest web server for Phaser is Apache2. Install with
+Browsers tend to be unhappy with loading assets into local files, and thus Phaser requires a local web server in order to properly run the game. If you attempt to open the index.html file in the dist/ directory, it probably won't work, and will spit up some Uncaught SecurityError, Cross-Origin, and XMLHttpRequest errors in your JS console. This is an easy fix though! In my opinion, the easiest web server for Phaser is Apache2. Install with
 
 {% highlight bash %}
 #Install Apache Web server
@@ -213,17 +213,55 @@ This code is located in the <code class=" language-markup">/var/www/html</code> 
 
 #Script that copies current game build to Apache web server html directory
 echo "deleting old files" #not 100% needed, but the generator won't delete old files/assets that are no longer used. It will only copy in new stuff you add. Thus I'm manually doing it here.
-rm -rf dist #build output folder
+rm -rf dist #delete game output folder
 sudo rm -rf /var/www/html/ #delete current contents of apache's web directory
 
 echo "copying new build to localhost"
-grunt build #compile js
-sudo cp -a $(pwd)/dist /var/www/html/ #copy over files to apache's web directory
+grunt build #compile js to 'dist' folder
+sudo cp -a $(pwd)/dist /var/www/html/ #copy dist's files to apache's web directory
 {% endhighlight %}
 
 After running the script, the default generator game should be playable at the URL 'localhost'.
+
+![Default Phaser Yeoman Game](../img/yeoman_game.png)
 
 {% endcapture %}
 
 
 {% include collapsable.html title="Running The Game" content = markdown_content_block %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% capture markdown_content_block %}
+
+After running the generator you are left with the game 'Click the Yeoman Logo'. Before we go any further in making our own game, I'll cover how this simple game works first.
+
+{% endcapture %}
+
+
+{% include collapsable.html title="Click the Yeoman Logo" content = markdown_content_block %}
